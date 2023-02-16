@@ -1,21 +1,27 @@
+import 'package:equatable/equatable.dart';
+
 class ManageStatusCode {
   HttpStatusCodeModel findError({int sCode = 500}) {
     final error = _allContent.firstWhere(
         (element) => element.statusCode == sCode,
         orElse: () => HttpStatusCodeModel(
-            statusCode: sCode, description: 'خطای ناشناخته'));
+            statusCode: sCode, description: 'Unknown error'));
     return error;
   }
 }
 
-class HttpStatusCodeModel {
-  late int statusCode;
-  late String description;
+class HttpStatusCodeModel extends Equatable {
+  final int statusCode;
+  final String description;
 
-  HttpStatusCodeModel({required this.statusCode, required this.description});
+  const HttpStatusCodeModel(
+      {required this.statusCode, required this.description});
+
+  @override
+  List<Object?> get props => [statusCode, description];
 }
 
-List<HttpStatusCodeModel> _allContent = [
+List<HttpStatusCodeModel> _allContent = const [
   HttpStatusCodeModel(statusCode: 100, description: 'Continue'),
   HttpStatusCodeModel(statusCode: 101, description: 'Switching Protocols'),
   HttpStatusCodeModel(statusCode: 102, description: 'Processing'),
