@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class Constants {
   /// [errors]
   static const serverErrorDesc = 'Error: No response from the server';
@@ -6,4 +8,7 @@ class Constants {
 
   /// [times]
   static const serverTimeout = Duration(seconds: 20);
+
+  /// [colors]
+  static final scaffoldBackgroundColor = Colors.grey.shade200;
 }
