@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.requester">
+    package="efafi.mostafa.requester">
    <application
         android:label="requester"
         android:name="${applicationName}"
