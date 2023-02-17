@@ -27,11 +27,14 @@ class _HomePageState extends State<HomePage> {
           children: [
             const RequestTypeList(),
             CustomEditText(controller: TextEditingController()),
+            const SizedBox(
+              height: 10,
+            ),
             MaterialButton(
               color: Theme.of(context).colorScheme.secondary,
               onPressed: () {},
               child: const Text(
-                'Send',
+                En.send,
                 style: TextStyle(color: Colors.white),
               ),
             )

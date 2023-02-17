@@ -22,7 +22,7 @@ class RequestTypeList extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 2),
-                    child: InkWell(
+                    child: GestureDetector(
                       onTap: () =>
                           BlocProvider.of<RequestTypeListCubit>(context)
                               .changeStatus(state[index]),
