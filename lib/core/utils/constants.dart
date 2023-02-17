@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:requester/core/params/request_type_param.dart';
+import 'package:requester/core/rest/rest_api.dart';
 
 class Constants {
   /// [errors]
@@ -11,4 +13,11 @@ class Constants {
 
   /// [colors]
   static final scaffoldBackgroundColor = Colors.grey.shade200;
+
+  /// [public]
+  static final initRequestTypeList = [
+    RequestTypeParam(
+        title: 'Get', requestType: RequestType.getRequest, isSelected: true),
+    RequestTypeParam(title: 'Post', requestType: RequestType.postRequest)
+  ];
 }

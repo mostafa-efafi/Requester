@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:requester/config/languages/en.dart';
 import 'package:requester/core/utils/constants.dart';
+import 'package:requester/features/feature_requester/presentation/bloc/request_type_list_cubit.dart';
 import 'package:requester/features/feature_requester/presentation/widgets/custom_edit_text.dart';
+import 'package:requester/features/feature_requester/presentation/widgets/request_type_list.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -20,10 +21,22 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Text(En.appName),
       ),
-      body: Column(
-        children: [
-          SizedBox(height: 10,),
-          CustomEditText(controller: TextEditingController())],
+      body: BlocProvider(
+        create: (context) => RequestTypeListCubit(),
+        child: Column(
+          children: [
+            const RequestTypeList(),
+            CustomEditText(controller: TextEditingController()),
+            MaterialButton(
+              color: Theme.of(context).colorScheme.secondary,
+              onPressed: () {},
+              child: const Text(
+                'Send',
+                style: TextStyle(color: Colors.white),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
