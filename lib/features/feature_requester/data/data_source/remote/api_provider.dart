@@ -20,7 +20,7 @@ class ApiProvider {
 
   /// api provider for [post] request
   Future<DataState<Response>> postMethod(
-      {required String url, String? body}) async {
+      {required String url, Map<String, dynamic>? body}) async {
     final response = await restApi.request(url,
         requestType: RequestType.postRequest, body: body);
     if (response is DataSuccess) {
