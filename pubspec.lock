@@ -251,6 +251,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "8.1.2"
+  flutter_json_view:
+    dependency: "direct main"
+    description:
+      name: flutter_json_view
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.0"
   flutter_launcher_icons:
     dependency: "direct dev"
     description:
