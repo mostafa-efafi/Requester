@@ -18,6 +18,7 @@ class RestApi {
     var body,
     Map<String, String>? headers,
   }) async {
+    url = 'https://$url';
     Response<dynamic> response;
     final bool connectNetwork = await NetworkChecker.checkConnection();
     if (connectNetwork == true) {
@@ -118,7 +119,7 @@ class RestApi {
     }).timeout(Constants.serverTimeout);
   }
 
-@visibleForTesting
+  @visibleForTesting
   String makeAlerts({Response? response}) {
     final ManageStatusCode manageSC = ManageStatusCode();
     final HttpStatusCodeModel error =

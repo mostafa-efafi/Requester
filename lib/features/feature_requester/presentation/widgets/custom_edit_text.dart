@@ -19,7 +19,7 @@ class CustomEditText extends StatelessWidget {
         enableInteractiveSelection: true,
         textInputAction: TextInputAction.go,
         style: TextStyle(color: Colors.grey[800]),
-        textAlign: TextAlign.center,
+        textAlign: TextAlign.left,
         textDirection: TextDirection.ltr,
         decoration: InputDecoration(
             enabledBorder: const OutlineInputBorder(
@@ -27,11 +27,12 @@ class CustomEditText extends StatelessWidget {
                 borderRadius: BorderRadius.all(Radius.circular(5))),
             border: const OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(5)),
-              borderSide: BorderSide(color: Colors.deepPurple),
+              borderSide: BorderSide(color: Colors.teal),
             ),
-            hintText: 'enter URL',
+            hintText: 'URL',
             hintStyle: const TextStyle(color: Colors.grey),
             suffixIcon: _pasteButton(),
+            prefixText: 'https:// ',
             labelStyle: const TextStyle(color: Colors.grey),
             fillColor: Colors.white,
             filled: true,
