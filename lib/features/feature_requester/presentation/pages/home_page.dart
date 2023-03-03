@@ -1,11 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:requester/config/languages/en.dart';
 import 'package:requester/core/params/sent_param.dart';
+import 'package:requester/core/rest/rest_api.dart';
 import 'package:requester/core/utils/constants.dart';
 import 'package:requester/di.dart';
 import 'package:requester/features/feature_requester/presentation/bloc/home_page_bloc/home_page_bloc.dart';
 import 'package:requester/features/feature_requester/presentation/bloc/request_type_list_cubit.dart';
+import 'package:requester/features/feature_requester/presentation/widgets/body_fields_generator.dart';
 import 'package:requester/features/feature_requester/presentation/widgets/custom_edit_text.dart';
 import 'package:requester/features/feature_requester/presentation/widgets/json_viewer.dart';
 import 'package:requester/features/feature_requester/presentation/widgets/request_type_list.dart';
@@ -19,7 +23,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   /// for [url] textField
-  TextEditingController textController = TextEditingController();
+  TextEditingController urlTextController = TextEditingController();
+  TextEditingController postBodyTextController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -41,10 +46,12 @@ class _HomePageState extends State<HomePage> {
               Column(
                 children: [
                   const RequestTypeList(),
-                  CustomEditText(controller: textController),
+                  CustomEditText(controller: urlTextController),
                   const SizedBox(
                     height: 10,
                   ),
+                  BodyFieldsGenerator(
+                      postBodyTextController: postBodyTextController),
                   _sendButton(builderContext),
                 ],
               ),
@@ -69,8 +76,12 @@ class _HomePageState extends State<HomePage> {
             .firstWhere((element) => element.isSelected == true);
         final sentParam = SentParam(
             requestType: requestTypeParam.requestType,
-            url: textController.text);
-            /// send request Bloc Event
+            url: urlTextController.text,
+            postBody: requestTypeParam.requestType == RequestType.postRequest
+                ? json.decode(postBodyTextController.text)
+                : null);
+
+        /// send request Bloc Event
         BlocProvider.of<HomePageBloc>(context).add(SendRequestEvent(sentParam));
       },
       child: const Text(

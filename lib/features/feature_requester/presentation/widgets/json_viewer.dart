@@ -21,12 +21,14 @@ class JsonViewer extends StatelessWidget {
         } else if (state.requestStatus is RequestNoAction) {
           /// for sample show json data
           return _jsonVContainer(Constants.sampleJson);
-        } else {
+        } else if (state.requestStatus is RequestLoading) {
           return Column(
             children: const [
               CircularProgressIndicator(),
             ],
           );
+        } else {
+          return const SizedBox();
         }
       },
     );

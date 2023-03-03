@@ -31,7 +31,7 @@ class CustomEditText extends StatelessWidget {
             ),
             hintText: 'URL',
             hintStyle: const TextStyle(color: Colors.grey),
-            suffixIcon: _pasteButton(),
+            // suffixIcon: _pasteButton(),
             prefixText: 'https:// ',
             labelStyle: const TextStyle(color: Colors.grey),
             fillColor: Colors.white,
