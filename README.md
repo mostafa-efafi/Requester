@@ -1,16 +1,14 @@
 <!-- PROJECT SHIELDS -->
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
+  [![Build APK](https://github.com/mostafa-efafi/Requester/actions/workflows/build.yml/badge.svg)](https://github.com/mostafa-efafi/Requester/actions/workflows/build.yml)
+   ![Made with Flutter](https://img.shields.io/badge/Made%20with-Flutter-1f425f.svg)
+   [![version](https://img.shields.io/github/v/tag/mostafa-efafi/Requester?label=latest%20version)](https://img.shields.io/github/v/tag/mostafa-efafi/Requester?label=latest%20version)
 <!-- PROJECT LOGO -->
 # Requester
 
 > An application to send all kinds of Http requests and display their answers ,like postman.
   
 <p align="left">
-    <img src="./assets/images/Screenshot.png" alt="preview" width="700"/>
+    <img src="./assets/images/Screenshot.png" alt="preview" width="315"/>
 </p>
 
 _Requester_ is a mobile application written in Flutter to send requests to the server and display their results. No ads, no account, no sign-up, no tracking.
