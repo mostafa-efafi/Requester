@@ -7,6 +7,7 @@ import 'package:requester/core/resource/data_state.dart';
 import 'package:requester/core/rest/manage_status_code.dart';
 import 'package:requester/core/rest/network_checker.dart';
 import 'package:requester/core/utils/constants.dart';
+import 'package:requester/core/utils/text_tools.dart';
 
 class RestApi {
   final Dio _dio = Dio();
@@ -18,7 +19,9 @@ class RestApi {
     var body,
     Map<String, String>? headers,
   }) async {
-    url = 'https://$url';
+    /// added [http] to url
+    url = TextTools.makestandardUrl(url);
+    
     Response<dynamic> response;
     final bool connectNetwork = await NetworkChecker.checkConnection();
     if (connectNetwork == true) {
