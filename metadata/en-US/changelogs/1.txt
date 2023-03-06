@@ -1,0 +1,1 @@
+- The method of sending GET and POST was added
