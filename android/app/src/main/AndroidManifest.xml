@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="efafi.mostafa.requester">
    <application
-        android:label="requester"
+        android:label="Requester"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

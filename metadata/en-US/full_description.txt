@@ -1,0 +1,9 @@
+Requester is a mobile application written in Flutter to send requests to the server and display their results. No ads, no account, no sign-up, no tracking.
+
+Features and Components:
+    -Sending all types of requests to the server
+    -Displaying the return type of JSON in an understandable way
+    -The possibility of paste an URL
+    -Written in Dart language and Flutter framework
+    -Available for Android devices
+    -The iOS version will be added soon
