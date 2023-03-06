@@ -1,3 +1,4 @@
+import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 
 class CustomEditText extends StatelessWidget {
@@ -29,10 +30,9 @@ class CustomEditText extends StatelessWidget {
               borderRadius: BorderRadius.all(Radius.circular(5)),
               borderSide: BorderSide(color: Colors.teal),
             ),
-            hintText: 'URL',
+            hintText: 'Enter URL',
             hintStyle: const TextStyle(color: Colors.grey),
-            // suffixIcon: _pasteButton(),
-            prefixText: 'https:// ',
+            suffixIcon: _pasteButton(),
             labelStyle: const TextStyle(color: Colors.grey),
             fillColor: Colors.white,
             filled: true,
@@ -44,7 +44,11 @@ class CustomEditText extends StatelessWidget {
 
   Widget _pasteButton() {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        FlutterClipboard.paste().then((value) {
+          controller.text = value;
+        });
+      },
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 4),
         decoration: const BoxDecoration(
