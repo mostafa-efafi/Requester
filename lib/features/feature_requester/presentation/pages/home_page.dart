@@ -6,8 +6,10 @@ import 'package:requester/config/languages/en.dart';
 import 'package:requester/core/params/sent_param.dart';
 import 'package:requester/core/rest/rest_api.dart';
 import 'package:requester/core/utils/constants.dart';
+import 'package:requester/core/utils/snack_bar_tools.dart';
 import 'package:requester/di.dart';
 import 'package:requester/features/feature_requester/presentation/bloc/home_page_bloc/home_page_bloc.dart';
+import 'package:requester/features/feature_requester/presentation/bloc/home_page_bloc/request_status.dart';
 import 'package:requester/features/feature_requester/presentation/bloc/request_type_list_cubit.dart';
 import 'package:requester/features/feature_requester/presentation/widgets/body_fields_generator.dart';
 import 'package:requester/features/feature_requester/presentation/widgets/custom_edit_text.dart';
@@ -26,6 +28,8 @@ class _HomePageState extends State<HomePage> {
   TextEditingController urlTextController = TextEditingController();
   TextEditingController postBodyTextController = TextEditingController();
 
+  final snackBarTools = SnackBarTools();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,27 +43,40 @@ class _HomePageState extends State<HomePage> {
           BlocProvider(create: (_) => di<HomePageBloc>())
         ],
         child: Builder(builder: (builderContext) {
-          return ListView(
-            shrinkWrap: false,
-            scrollDirection: Axis.vertical,
-            children: [
-              Column(
-                children: [
-                  const RequestTypeList(),
-                  CustomEditText(controller: urlTextController),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  BodyFieldsGenerator(
-                      postBodyTextController: postBodyTextController),
-                  _sendButton(builderContext),
-                ],
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              const JsonViewer(),
-            ],
+          return BlocListener<HomePageBloc, HomePageState>(
+            listener: (context, state) {
+              if (state.requestStatus is RequestError) {
+                final data = state.requestStatus as RequestError;
+                snackBarTools.showIconSnackBar(
+                    text: data.errorMessage,
+                    context: context,
+                    color: Colors.red,
+                    hidePreviousSnackBar: true,
+                    iconC: Icons.error_rounded);
+              }
+            },
+            child: ListView(
+              shrinkWrap: false,
+              scrollDirection: Axis.vertical,
+              children: [
+                Column(
+                  children: [
+                    const RequestTypeList(),
+                    CustomEditText(controller: urlTextController),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    BodyFieldsGenerator(
+                        postBodyTextController: postBodyTextController),
+                    _sendButton(builderContext),
+                  ],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                const JsonViewer(),
+              ],
+            ),
           );
         }),
       ),
@@ -77,7 +94,8 @@ class _HomePageState extends State<HomePage> {
         final sentParam = SentParam(
             requestType: requestTypeParam.requestType,
             url: urlTextController.text,
-            postBody: requestTypeParam.requestType == RequestType.postRequest
+            postBody: requestTypeParam.requestType == RequestType.postRequest &&
+                    postBodyTextController.text != ''
                 ? json.decode(postBodyTextController.text)
                 : null);
 
