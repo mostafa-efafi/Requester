@@ -1,0 +1,2 @@
+- Fixed internet connection in release version
+- The possibility of pasting the address was added
