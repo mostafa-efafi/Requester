@@ -26,7 +26,7 @@ class SnackBarTools {
             duration: Duration(
                 milliseconds: _getSnackBarDurationFromTextLenght(text: text!)),
             content: Directionality(
-              textDirection: TextDirection.rtl,
+              textDirection: TextDirection.ltr,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
