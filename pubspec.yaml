@@ -1,5 +1,5 @@
 name: requester
-description:  An application to send all kinds of Http requests and display their answers .
+description:  An application to send all kinds of Http requests and display their answers.
 
 publish_to: 'none' 
 

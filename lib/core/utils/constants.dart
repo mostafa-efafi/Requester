@@ -8,7 +8,7 @@ class Constants {
   static const poorConnectionDesc = 'Error: Poor connection';
   static const noConnectToNetwork = 'Error: no internet connection';
   static const noOutputExist =
-      'The entered address does not have a Jason output';
+      'The entered address does not have a JSON output';
 
   /// [times]
   static const serverTimeout = Duration(seconds: 20);

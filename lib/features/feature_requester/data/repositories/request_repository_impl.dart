@@ -16,7 +16,7 @@ class RequestRepositoryImpl implements RequestRepository {
       try {
         final toMap = response.data!.data is String
             ? json.decode(response.data!.data as String)
-            : response.data;
+            : response.data!.data;
         return DataSuccess(toMap);
       } catch (e) {
         return const DataFailed(Constants.noOutputExist);
@@ -34,7 +34,7 @@ class RequestRepositoryImpl implements RequestRepository {
       try {
         final toMap = response.data!.data is String
             ? json.decode(response.data!.data as String)
-            : response.data;
+            : response.data!.data;
         return DataSuccess(toMap);
       } catch (e) {
         return const DataFailed(Constants.noOutputExist);
