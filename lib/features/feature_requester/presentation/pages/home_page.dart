@@ -15,6 +15,7 @@ import 'package:requester/features/feature_requester/presentation/widgets/body_f
 import 'package:requester/features/feature_requester/presentation/widgets/custom_edit_text.dart';
 import 'package:requester/features/feature_requester/presentation/widgets/json_viewer.dart';
 import 'package:requester/features/feature_requester/presentation/widgets/request_type_list.dart';
+import 'package:requester/features/feature_requester/presentation/widgets/status_bar_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -69,6 +70,7 @@ class _HomePageState extends State<HomePage> {
                     BodyFieldsGenerator(
                         postBodyTextController: postBodyTextController),
                     _sendButton(builderContext),
+                    const StatusBarWodget(),
                   ],
                 ),
                 const SizedBox(
