@@ -1,4 +1,6 @@
+import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:requester/core/rest/network_checker.dart';
 import 'package:requester/core/rest/rest_api.dart';
 import 'package:requester/features/feature_requester/data/data_source/remote/api_provider.dart';
 import 'package:requester/features/feature_requester/data/repositories/request_repository_impl.dart';
@@ -11,7 +13,9 @@ GetIt di = GetIt.instance;
 
 setupDI() {
   /// [tools]
-  di.registerSingleton<RestApi>(RestApi());
+  di.registerSingleton<Dio>(Dio());
+  di.registerSingleton<NetworkChecker>(NetworkChecker());
+  di.registerSingleton<RestApi>(RestApi(di()));
 
   /// [data Sources]
   di.registerSingleton<ApiProvider>(ApiProvider(di()));

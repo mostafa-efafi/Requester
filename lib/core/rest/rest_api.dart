@@ -10,7 +10,10 @@ import 'package:requester/core/utils/constants.dart';
 import 'package:requester/core/utils/text_tools.dart';
 
 class RestApi {
-  final Dio _dio = Dio();
+  final Dio dio = Dio();
+  final NetworkChecker networkChecker;
+
+  RestApi(this.networkChecker);
 
   /// The main method for sending requests includes all types of [get] , [post] and...
   Future<DataState<Response>> request(
@@ -21,9 +24,9 @@ class RestApi {
   }) async {
     /// added [http] to url
     url = TextTools.makestandardUrl(url);
-    
+
     Response<dynamic> response;
-    final bool connectNetwork = await NetworkChecker.checkConnection();
+    final bool connectNetwork = await networkChecker.checkConnection();
     if (connectNetwork == true) {
       try {
         if (requestType == RequestType.postRequest) {
@@ -47,18 +50,18 @@ class RestApi {
       } on TimeoutException catch (e) {
         debugPrint(e.toString());
         return const DataFailed('error ${Constants.poorConnectionDesc} ');
-      } on Error catch (e) {
+      } catch (e) {
         debugPrint('Error: $e');
         return const DataFailed('error ${Constants.poorConnectionDesc} ');
       }
 
-      ///[decoded Result]
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        return DataSuccess(response);
-      } else {
+      if (response.statusCode != 200) {
         makeAlerts(response: response);
-        return const DataFailed(Constants.serverErrorDesc);
+        // return const DataFailed(Constants.serverErrorDesc);
       }
+
+      ///[decoded Result]
+      return DataSuccess(response);
     } else {
       return const DataFailed(Constants.noConnectToNetwork);
     }
@@ -70,7 +73,7 @@ class RestApi {
       required FormData body,
       Map<String, String>? headers,
       CancelToken? cancellToken}) async {
-    var response = await _dio.post(url,
+    var response = await dio.post(url,
         data: body,
         options: _makeOptions(headers: headers),
         cancelToken: cancellToken, onSendProgress: (int sent, int total) {
@@ -84,7 +87,7 @@ class RestApi {
       {required String url,
       Map<String, String>? headers,
       CancelToken? cancellToken}) async {
-    return _dio
+    return dio
         .get(
       url,
       cancelToken: cancellToken,
@@ -108,7 +111,7 @@ class RestApi {
       dynamic body,
       Map<String, String>? headers,
       CancelToken? cancellToken}) async {
-    return _dio
+    return dio
         .post(url,
             data: body,
             options: _makeOptions(headers: headers),
@@ -136,7 +139,7 @@ class RestApi {
 
 Options _makeOptions({Map<String, String>? headers}) {
   return Options(
-      receiveDataWhenStatusError: false,
+      receiveDataWhenStatusError: true,
       receiveTimeout: Constants.serverTimeout,
       sendTimeout: Constants.serverTimeout,
       validateStatus: (status) => true,
