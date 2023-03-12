@@ -4,7 +4,9 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:requester/core/resource/data_state.dart';
 import 'package:requester/features/feature_requester/data/data_source/remote/api_provider.dart';
+import 'package:requester/features/feature_requester/data/models/request_response_model.dart';
 import 'package:requester/features/feature_requester/data/repositories/request_repository_impl.dart';
+import 'package:requester/features/feature_requester/domain/entities/request_reponse_entity.dart';
 
 import 'request_repository_impl_test.mocks.dart';
 
@@ -14,10 +16,12 @@ RequestRepositoryImpl repository = RequestRepositoryImpl(mockApiProvider);
 
 void main() {
   group('fetchGetMethod', () {
-    const tMap = {'name': 'test'};
     const errorMsg = 'Error';
-    final tResponse =
-        DataSuccess(Response(requestOptions: RequestOptions(), data: tMap));
+    final tResponse = DataSuccess(
+        Response(requestOptions: RequestOptions(), data: {'name': 'test'}));
+    RequestResponsEntity tEntity =
+        RequestReponseModel.fromResponse(tResponse.data!);
+
     test('should be return dataSuccess', () async {
       // arrange
       when(mockApiProvider.getMethod(any)).thenAnswer((_) async => tResponse);
@@ -25,7 +29,7 @@ void main() {
       final result = await repository.fetchGetMethod('http://google.com');
       // assert
       expect(result, isA<DataSuccess>());
-      expect(result.data, tMap);
+      expect(result.data, tEntity);
       verify(mockApiProvider.getMethod(any)).called(1);
     });
 
@@ -43,12 +47,13 @@ void main() {
   });
 
   group('fetchPostMethod', () {
-    const tMap = {'name': 'test'};
+    final tResponse = DataSuccess(
+        Response(requestOptions: RequestOptions(), data: {'name': 'test'}));
+    RequestResponsEntity tEntity =
+        RequestReponseModel.fromResponse(tResponse.data!);
     const url = 'http://google.com';
     const wrongUrl = 'Wrong_Url';
     const errorMsg = 'Error';
-    final tResponse =
-        DataSuccess(Response(requestOptions: RequestOptions(), data: tMap));
     test('should be return dataSuccess', () async {
       // arrange
       when(mockApiProvider.postMethod(url: url, body: {}))
@@ -57,7 +62,7 @@ void main() {
       final result = await repository.fetchPostMethod(url: url, body: {});
       // assert
       expect(result, isA<DataSuccess>());
-      expect(result.data, tMap);
+      expect(result.data, tEntity);
       verify(mockApiProvider.postMethod(url: url, body: {})).called(1);
     });
 
