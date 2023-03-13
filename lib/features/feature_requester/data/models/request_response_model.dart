@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:requester/features/feature_requester/domain/entities/request_reponse_entity.dart';
 
@@ -12,7 +14,7 @@ class RequestReponseModel extends RequestResponsEntity {
 
   factory RequestReponseModel.fromResponse(Response response) {
     return RequestReponseModel(
-      data: response.data.toString(),
+      data: json.encode(response.data),
       statusCode: response.statusCode,
       statusMessage: response.statusMessage,
       // headers : response.headers,
