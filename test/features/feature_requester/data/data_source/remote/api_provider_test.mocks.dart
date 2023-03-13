@@ -3,12 +3,13 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i4;
+import 'dart:async' as _i6;
 
-import 'package:dio/dio.dart' as _i5;
+import 'package:dio/dio.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:requester/core/resource/data_state.dart' as _i2;
-import 'package:requester/core/rest/rest_api.dart' as _i3;
+import 'package:requester/core/resource/data_state.dart' as _i4;
+import 'package:requester/core/rest/network_checker.dart' as _i3;
+import 'package:requester/core/rest/rest_api.dart' as _i5;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -21,8 +22,29 @@ import 'package:requester/core/rest/rest_api.dart' as _i3;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeDataState_0<T> extends _i1.SmartFake implements _i2.DataState<T> {
-  _FakeDataState_0(
+class _FakeDio_0 extends _i1.SmartFake implements _i2.Dio {
+  _FakeDio_0(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeNetworkChecker_1 extends _i1.SmartFake
+    implements _i3.NetworkChecker {
+  _FakeNetworkChecker_1(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeDataState_2<T> extends _i1.SmartFake implements _i4.DataState<T> {
+  _FakeDataState_2(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -34,15 +56,31 @@ class _FakeDataState_0<T> extends _i1.SmartFake implements _i2.DataState<T> {
 /// A class which mocks [RestApi].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockRestApi extends _i1.Mock implements _i3.RestApi {
+class MockRestApi extends _i1.Mock implements _i5.RestApi {
   MockRestApi() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<_i2.DataState<_i5.Response<dynamic>>> request(
+  _i2.Dio get dio => (super.noSuchMethod(
+        Invocation.getter(#dio),
+        returnValue: _FakeDio_0(
+          this,
+          Invocation.getter(#dio),
+        ),
+      ) as _i2.Dio);
+  @override
+  _i3.NetworkChecker get networkChecker => (super.noSuchMethod(
+        Invocation.getter(#networkChecker),
+        returnValue: _FakeNetworkChecker_1(
+          this,
+          Invocation.getter(#networkChecker),
+        ),
+      ) as _i3.NetworkChecker);
+  @override
+  _i6.Future<_i4.DataState<_i2.Response<dynamic>>> request(
     String? url, {
-    _i3.RequestType? requestType = _i3.RequestType.getRequest,
+    _i5.RequestType? requestType = _i5.RequestType.getRequest,
     dynamic body,
     Map<String, String>? headers,
   }) =>
@@ -56,8 +94,8 @@ class MockRestApi extends _i1.Mock implements _i3.RestApi {
             #headers: headers,
           },
         ),
-        returnValue: _i4.Future<_i2.DataState<_i5.Response<dynamic>>>.value(
-            _FakeDataState_0<_i5.Response<dynamic>>(
+        returnValue: _i6.Future<_i4.DataState<_i2.Response<dynamic>>>.value(
+            _FakeDataState_2<_i2.Response<dynamic>>(
           this,
           Invocation.method(
             #request,
@@ -69,9 +107,9 @@ class MockRestApi extends _i1.Mock implements _i3.RestApi {
             },
           ),
         )),
-      ) as _i4.Future<_i2.DataState<_i5.Response<dynamic>>>);
+      ) as _i6.Future<_i4.DataState<_i2.Response<dynamic>>>);
   @override
-  String makeAlerts({_i5.Response<dynamic>? response}) => (super.noSuchMethod(
+  String makeAlerts({_i2.Response<dynamic>? response}) => (super.noSuchMethod(
         Invocation.method(
           #makeAlerts,
           [],

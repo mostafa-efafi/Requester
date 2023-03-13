@@ -1,9 +1,12 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:requester/core/params/sent_param.dart';
 import 'package:requester/core/resource/data_state.dart';
 import 'package:requester/core/rest/rest_api.dart';
+import 'package:requester/features/feature_requester/data/models/request_response_model.dart';
+import 'package:requester/features/feature_requester/domain/entities/request_reponse_entity.dart';
 import 'package:requester/features/feature_requester/domain/usecases/request_usecase.dart';
 import 'package:requester/features/feature_requester/presentation/bloc/home_page_bloc/home_page_bloc.dart';
 import 'package:requester/features/feature_requester/presentation/bloc/home_page_bloc/request_status.dart';
@@ -16,10 +19,15 @@ MockRequestUsecaseImpl mockRequestUsecaseImpl = MockRequestUsecaseImpl();
 void main() {
   final bloc = HomePageBloc(mockRequestUsecaseImpl);
   group('SendRequestEvent', () {
-    const tResponse = DataSuccess({'response': 'true'});
+    const data ={'response': 'true'};
     const errorMsg = 'Error!';
     final sentParamGet =
         SentParam(requestType: RequestType.getRequest, url: 'url');
+    final fetchData =
+        DataSuccess(Response(requestOptions: RequestOptions(), data: data));
+    RequestResponsEntity tEntity =
+        RequestReponseModel.fromResponse(fetchData.data!);
+    final tResponse = DataSuccess(tEntity);
     final sentParamPost = SentParam(
         requestType: RequestType.postRequest,
         url: 'url',

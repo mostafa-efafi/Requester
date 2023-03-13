@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:requester/core/params/sent_param.dart';
 import 'package:requester/core/resource/data_state.dart';
 import 'package:requester/core/rest/rest_api.dart';
+import 'package:requester/features/feature_requester/domain/entities/request_reponse_entity.dart';
 import 'package:requester/features/feature_requester/domain/usecases/request_usecase.dart';
 import 'package:requester/features/feature_requester/presentation/bloc/home_page_bloc/request_status.dart';
 
@@ -15,7 +16,7 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
       : super(HomePageState(requestStatus: RequestNoAction())) {
     // Send request to server event
     on<SendRequestEvent>((event, emit) async {
-      late DataState<Map<String, dynamic>> response;
+      late DataState<RequestResponsEntity> response;
 
       /// [loading] status first
       emit(state.copyWith(newRequestStatus: RequestLoading()));

@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:requester/features/feature_requester/domain/entities/request_reponse_entity.dart';
 
 abstract class RequestStatus extends Equatable {}
 
@@ -15,7 +16,7 @@ class RequestLoading extends RequestStatus {
 }
 
 class RequestLoaded extends RequestStatus {
-  final Map<String, dynamic> response;
+  final RequestResponsEntity response;
   RequestLoaded(this.response);
   @override
   List<Object?> get props => [response];

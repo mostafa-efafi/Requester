@@ -9,6 +9,8 @@ import 'package:mockito/mockito.dart' as _i1;
 import 'package:requester/core/resource/data_state.dart' as _i3;
 import 'package:requester/features/feature_requester/data/repositories/request_repository_impl.dart'
     as _i2;
+import 'package:requester/features/feature_requester/domain/entities/request_reponse_entity.dart'
+    as _i6;
 import 'package:requester/features/feature_requester/domain/usecases/request_usecase.dart'
     as _i4;
 
@@ -62,24 +64,24 @@ class MockRequestUsecaseImpl extends _i1.Mock
         ),
       ) as _i2.RequestRepositoryImpl);
   @override
-  _i5.Future<_i3.DataState<Map<String, dynamic>>> getMothodUsecase(
+  _i5.Future<_i3.DataState<_i6.RequestResponsEntity>> getMothodUsecase(
           String? url) =>
       (super.noSuchMethod(
         Invocation.method(
           #getMothodUsecase,
           [url],
         ),
-        returnValue: _i5.Future<_i3.DataState<Map<String, dynamic>>>.value(
-            _FakeDataState_1<Map<String, dynamic>>(
+        returnValue: _i5.Future<_i3.DataState<_i6.RequestResponsEntity>>.value(
+            _FakeDataState_1<_i6.RequestResponsEntity>(
           this,
           Invocation.method(
             #getMothodUsecase,
             [url],
           ),
         )),
-      ) as _i5.Future<_i3.DataState<Map<String, dynamic>>>);
+      ) as _i5.Future<_i3.DataState<_i6.RequestResponsEntity>>);
   @override
-  _i5.Future<_i3.DataState<Map<String, dynamic>>> postMethodUsecase({
+  _i5.Future<_i3.DataState<_i6.RequestResponsEntity>> postMethodUsecase({
     required String? url,
     Map<String, dynamic>? body,
   }) =>
@@ -92,8 +94,8 @@ class MockRequestUsecaseImpl extends _i1.Mock
             #body: body,
           },
         ),
-        returnValue: _i5.Future<_i3.DataState<Map<String, dynamic>>>.value(
-            _FakeDataState_1<Map<String, dynamic>>(
+        returnValue: _i5.Future<_i3.DataState<_i6.RequestResponsEntity>>.value(
+            _FakeDataState_1<_i6.RequestResponsEntity>(
           this,
           Invocation.method(
             #postMethodUsecase,
@@ -104,5 +106,5 @@ class MockRequestUsecaseImpl extends _i1.Mock
             },
           ),
         )),
-      ) as _i5.Future<_i3.DataState<Map<String, dynamic>>>);
+      ) as _i5.Future<_i3.DataState<_i6.RequestResponsEntity>>);
 }

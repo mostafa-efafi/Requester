@@ -8,6 +8,7 @@ import 'package:requester/di.dart';
 import 'features/feature_requester/presentation/pages/home_page.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   ///  init locator
   await setupDI();
   HttpOverrides.global = MyHttpOverrides();

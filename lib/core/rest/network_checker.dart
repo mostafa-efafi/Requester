@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 
 /// Return [true] if the device was connected to the Internet, otherwise [false]
 class NetworkChecker {
-  static Future<bool> checkConnection() async {
+  Future<bool> checkConnection() async {
     if (kIsWeb) {
       return true;
     } else {
