@@ -1,0 +1,1 @@
+- Add a bar to display the request result status
