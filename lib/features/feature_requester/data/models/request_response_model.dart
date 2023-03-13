@@ -18,7 +18,7 @@ class RequestReponseModel extends RequestResponsEntity {
       statusCode: response.statusCode,
       statusMessage: response.statusMessage,
       // headers : response.headers,
-      sendTime: response.requestOptions.sendTimeout,
+      sendTime: response.requestOptions.connectTimeout ?? Duration.zero,
       resultType: response.requestOptions.responseType,
     );
   }
