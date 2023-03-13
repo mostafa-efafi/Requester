@@ -1,7 +1,8 @@
 import 'package:requester/core/resource/data_state.dart';
+import 'package:requester/features/feature_requester/domain/entities/request_reponse_entity.dart';
 
 abstract class RequestRepository {
-  Future<DataState<Map<String, dynamic>>> fetchGetMethod(String url);
-  Future<DataState<Map<String, dynamic>>> fetchPostMethod(
-      {required String url, Map<String , dynamic>? body});
+  Future<DataState<RequestResponsEntity>> fetchGetMethod(String url);
+  Future<DataState<RequestResponsEntity>> fetchPostMethod(
+      {required String url, Map<String, dynamic>? body});
 }
