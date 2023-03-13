@@ -1,8 +1,11 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:requester/core/resource/data_state.dart';
+import 'package:requester/features/feature_requester/data/models/request_response_model.dart';
 import 'package:requester/features/feature_requester/data/repositories/request_repository_impl.dart';
+import 'package:requester/features/feature_requester/domain/entities/request_reponse_entity.dart';
 import 'package:requester/features/feature_requester/domain/usecases/request_usecase.dart';
 
 import 'request_usecase_test.mocks.dart';
@@ -14,7 +17,12 @@ void main() {
   group('getMothodUsecase', () {
     final usecase = RequestUsecaseImpl(mockRequestRepositoryImpl);
     const data = {'data': 'success'};
-    const tResponse = DataSuccess(data);
+    final fetchData =
+        DataSuccess(Response(requestOptions: RequestOptions(), data: data));
+    RequestResponsEntity tEntity =
+        RequestReponseModel.fromResponse(fetchData.data!);
+    final tResponse = DataSuccess(tEntity);
+
     const errorMsg = 'Error!';
 
     test('should be resturn dataSuccess', () async {
@@ -25,7 +33,7 @@ void main() {
       final result = await usecase.getMothodUsecase('url');
       // assert
       expect(result, isA<DataSuccess>());
-      expect(result.data, data);
+      expect(result.data, tEntity);
       verify(mockRequestRepositoryImpl.fetchGetMethod(any)).called(1);
     });
 
@@ -45,7 +53,12 @@ void main() {
   group('postMethodUsecase', () {
     final usecase = RequestUsecaseImpl(mockRequestRepositoryImpl);
     const data = {'data': 'success'};
-    const tResponse = DataSuccess(data);
+    final fetchData =
+        DataSuccess(Response(requestOptions: RequestOptions(), data: data));
+    RequestResponsEntity tEntity =
+        RequestReponseModel.fromResponse(fetchData.data!);
+    final tResponse = DataSuccess(tEntity);
+
     const errorMsg = 'Error!';
     const url = 'url';
     const Map<String, dynamic> body = {};
@@ -57,7 +70,7 @@ void main() {
       final result = await usecase.postMethodUsecase(url: url, body: body);
       // assert
       expect(result, isA<DataSuccess>());
-      expect(result.data, data);
+      expect(result.data, tEntity);
       verify(mockRequestRepositoryImpl.fetchPostMethod(url: url, body: body))
           .called(1);
     });

@@ -11,6 +11,8 @@ import 'package:requester/features/feature_requester/data/data_source/remote/api
     as _i2;
 import 'package:requester/features/feature_requester/data/repositories/request_repository_impl.dart'
     as _i4;
+import 'package:requester/features/feature_requester/domain/entities/request_reponse_entity.dart'
+    as _i6;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -61,23 +63,24 @@ class MockRequestRepositoryImpl extends _i1.Mock
         ),
       ) as _i2.ApiProvider);
   @override
-  _i5.Future<_i3.DataState<Map<String, dynamic>>> fetchGetMethod(String? url) =>
+  _i5.Future<_i3.DataState<_i6.RequestResponsEntity>> fetchGetMethod(
+          String? url) =>
       (super.noSuchMethod(
         Invocation.method(
           #fetchGetMethod,
           [url],
         ),
-        returnValue: _i5.Future<_i3.DataState<Map<String, dynamic>>>.value(
-            _FakeDataState_1<Map<String, dynamic>>(
+        returnValue: _i5.Future<_i3.DataState<_i6.RequestResponsEntity>>.value(
+            _FakeDataState_1<_i6.RequestResponsEntity>(
           this,
           Invocation.method(
             #fetchGetMethod,
             [url],
           ),
         )),
-      ) as _i5.Future<_i3.DataState<Map<String, dynamic>>>);
+      ) as _i5.Future<_i3.DataState<_i6.RequestResponsEntity>>);
   @override
-  _i5.Future<_i3.DataState<Map<String, dynamic>>> fetchPostMethod({
+  _i5.Future<_i3.DataState<_i6.RequestResponsEntity>> fetchPostMethod({
     required String? url,
     Map<String, dynamic>? body,
   }) =>
@@ -90,8 +93,8 @@ class MockRequestRepositoryImpl extends _i1.Mock
             #body: body,
           },
         ),
-        returnValue: _i5.Future<_i3.DataState<Map<String, dynamic>>>.value(
-            _FakeDataState_1<Map<String, dynamic>>(
+        returnValue: _i5.Future<_i3.DataState<_i6.RequestResponsEntity>>.value(
+            _FakeDataState_1<_i6.RequestResponsEntity>(
           this,
           Invocation.method(
             #fetchPostMethod,
@@ -102,5 +105,5 @@ class MockRequestRepositoryImpl extends _i1.Mock
             },
           ),
         )),
-      ) as _i5.Future<_i3.DataState<Map<String, dynamic>>>);
+      ) as _i5.Future<_i3.DataState<_i6.RequestResponsEntity>>);
 }
