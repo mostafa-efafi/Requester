@@ -3,7 +3,7 @@ description:  An application to send all kinds of Http requests and display thei
 
 publish_to: 'none' 
 
-version: 1.0.4+4
+version: 1.0.5+5
 
 environment:
   sdk: '>=2.18.6 <3.0.0'
