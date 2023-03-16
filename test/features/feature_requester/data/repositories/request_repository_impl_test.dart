@@ -26,7 +26,7 @@ void main() {
       // arrange
       when(mockApiProvider.getMethod(any)).thenAnswer((_) async => tResponse);
       // act
-      final result = await repository.fetchGetMethod('http://google.com');
+      final result = await repository.fetchGetMethod('http://ubuntu.com');
       // assert
       expect(result, isA<DataSuccess>());
       expect(result.data, tEntity);
@@ -51,7 +51,7 @@ void main() {
         Response(requestOptions: RequestOptions(), data: {'name': 'test'}));
     RequestResponsEntity tEntity =
         RequestReponseModel.fromResponse(tResponse.data!);
-    const url = 'http://google.com';
+    const url = 'http://ubuntu.com';
     const wrongUrl = 'Wrong_Url';
     const errorMsg = 'Error';
     test('should be return dataSuccess', () async {

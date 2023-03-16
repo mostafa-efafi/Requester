@@ -12,7 +12,7 @@ import 'api_provider_test.mocks.dart';
 void main() {
   MockRestApi mockRestApi = MockRestApi();
   ApiProvider apiProvider = ApiProvider(mockRestApi);
-  const url = 'http://google.com';
+  const url = 'http://ubuntu.com';
   group('getMethod', () {
     final tResponse = DataSuccess(Response(requestOptions: RequestOptions()));
     const errorMsg = 'error';
