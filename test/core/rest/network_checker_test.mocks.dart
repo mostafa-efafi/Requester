@@ -3,11 +3,10 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i3;
+import 'dart:async' as _i4;
+import 'dart:io' as _i2;
+import 'dart:typed_data' as _i3;
 
-import 'package:connectivity_plus/connectivity_plus.dart' as _i2;
-import 'package:connectivity_plus_platform_interface/connectivity_plus_platform_interface.dart'
-    as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -21,27 +20,87 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-/// A class which mocks [Connectivity].
+class _FakeInternetAddressType_0 extends _i1.SmartFake
+    implements _i2.InternetAddressType {
+  _FakeInternetAddressType_0(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeInternetAddress_1 extends _i1.SmartFake
+    implements _i2.InternetAddress {
+  _FakeInternetAddress_1(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+/// A class which mocks [InternetAddress].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockConnectivity extends _i1.Mock implements _i2.Connectivity {
-  MockConnectivity() {
+class MockInternetAddress extends _i1.Mock implements _i2.InternetAddress {
+  MockInternetAddress() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i3.Stream<_i4.ConnectivityResult> get onConnectivityChanged =>
-      (super.noSuchMethod(
-        Invocation.getter(#onConnectivityChanged),
-        returnValue: _i3.Stream<_i4.ConnectivityResult>.empty(),
-      ) as _i3.Stream<_i4.ConnectivityResult>);
+  _i2.InternetAddressType get type => (super.noSuchMethod(
+        Invocation.getter(#type),
+        returnValue: _FakeInternetAddressType_0(
+          this,
+          Invocation.getter(#type),
+        ),
+      ) as _i2.InternetAddressType);
   @override
-  _i3.Future<_i4.ConnectivityResult> checkConnectivity() => (super.noSuchMethod(
+  String get address => (super.noSuchMethod(
+        Invocation.getter(#address),
+        returnValue: '',
+      ) as String);
+  @override
+  String get host => (super.noSuchMethod(
+        Invocation.getter(#host),
+        returnValue: '',
+      ) as String);
+  @override
+  _i3.Uint8List get rawAddress => (super.noSuchMethod(
+        Invocation.getter(#rawAddress),
+        returnValue: _i3.Uint8List(0),
+      ) as _i3.Uint8List);
+  @override
+  bool get isLoopback => (super.noSuchMethod(
+        Invocation.getter(#isLoopback),
+        returnValue: false,
+      ) as bool);
+  @override
+  bool get isLinkLocal => (super.noSuchMethod(
+        Invocation.getter(#isLinkLocal),
+        returnValue: false,
+      ) as bool);
+  @override
+  bool get isMulticast => (super.noSuchMethod(
+        Invocation.getter(#isMulticast),
+        returnValue: false,
+      ) as bool);
+  @override
+  _i4.Future<_i2.InternetAddress> reverse() => (super.noSuchMethod(
         Invocation.method(
-          #checkConnectivity,
+          #reverse,
           [],
         ),
-        returnValue: _i3.Future<_i4.ConnectivityResult>.value(
-            _i4.ConnectivityResult.bluetooth),
-      ) as _i3.Future<_i4.ConnectivityResult>);
+        returnValue:
+            _i4.Future<_i2.InternetAddress>.value(_FakeInternetAddress_1(
+          this,
+          Invocation.method(
+            #reverse,
+            [],
+          ),
+        )),
+      ) as _i4.Future<_i2.InternetAddress>);
 }
