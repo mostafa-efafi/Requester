@@ -1,1 +1,0 @@
-An application to send all kinds of Http requests and display their answers ,like postman.
