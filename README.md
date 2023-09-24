@@ -8,8 +8,8 @@
 > An application to send all kinds of Http requests and display their answers ,like postman.
   
 <p align="left">
-    <img src="./metadata/en-US/images/phoneScreenshots/1.png" alt="preview" width="315"/>
-    <img src="./metadata/en-US/images/phoneScreenshots/2.png" alt="preview" width="315"/>
+    <img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/1.png" alt="preview" width="315"/>
+    <img src="./fastlane/metadata/android/en-US/images/phoneScreenshots/2.png" alt="preview" width="315"/>
 </p>
 
 _Requester_ is a mobile application written in Flutter to send requests to the server and display their results. No ads, no account, no sign-up, no tracking.
