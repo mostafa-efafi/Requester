@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:requester/core/params/request_type_param.dart';
 import 'package:requester/core/rest/rest_api.dart';
+import 'package:requester/core/utils/itegration_test_keys.dart';
 import 'package:requester/features/feature_requester/presentation/bloc/request_type_list_cubit.dart';
 
 class BodyFieldsGenerator extends StatelessWidget {
@@ -51,6 +52,7 @@ class BodyFieldsGenerator extends StatelessWidget {
   Expanded _postBodyEditText() {
     return Expanded(
         child: TextField(
+      key: IntegrationTestKeys.iPostBodyEditTextKey,
       controller: postBodyTextController,
       decoration: const InputDecoration(
         enabledBorder: OutlineInputBorder(
