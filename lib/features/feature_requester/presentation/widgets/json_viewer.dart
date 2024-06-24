@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_json_view/flutter_json_view.dart';
+import 'package:requester/core/utils/itegration_test_keys.dart';
 import 'package:requester/features/feature_requester/presentation/bloc/home_page_bloc/home_page_bloc.dart';
 import 'package:requester/features/feature_requester/presentation/bloc/home_page_bloc/request_status.dart';
 
@@ -23,8 +24,8 @@ class JsonViewer extends StatelessWidget {
           /// for sample show json data
           return const SizedBox();
         } else if (state.requestStatus is RequestLoading) {
-          return Column(
-            children: const [
+          return const Column(
+            children: [
               CircularProgressIndicator(),
             ],
           );
@@ -39,6 +40,7 @@ class JsonViewer extends StatelessWidget {
     final toJson = json.decode(data);
     if (toJson is Map<String, dynamic>) {
       return JsonView.map(
+        key: IntegrationTestKeys.iJsonViewKey,
         toJson,
         theme: JsonViewTheme(
           backgroundColor: Colors.grey.shade100,

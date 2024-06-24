@@ -6,6 +6,7 @@ import 'package:requester/config/languages/en.dart';
 import 'package:requester/core/params/sent_param.dart';
 import 'package:requester/core/rest/rest_api.dart';
 import 'package:requester/core/utils/constants.dart';
+import 'package:requester/core/utils/itegration_test_keys.dart';
 import 'package:requester/core/utils/snack_bar_tools.dart';
 import 'package:requester/di.dart';
 import 'package:requester/features/feature_requester/presentation/bloc/home_page_bloc/home_page_bloc.dart';
@@ -63,14 +64,17 @@ class _HomePageState extends State<HomePage> {
                 Column(
                   children: [
                     const RequestTypeList(),
-                    CustomEditText(controller: urlTextController),
+                    CustomEditText(
+                      controller: urlTextController,
+                      key: IntegrationTestKeys.iEditTextKey,
+                    ),
                     const SizedBox(
                       height: 10,
                     ),
                     BodyFieldsGenerator(
                         postBodyTextController: postBodyTextController),
                     _sendButton(builderContext),
-                    const StatusBarWodget(),
+                    const StatusBarWidget(),
                   ],
                 ),
                 const SizedBox(
@@ -87,6 +91,7 @@ class _HomePageState extends State<HomePage> {
 
   MaterialButton _sendButton(BuildContext context) {
     return MaterialButton(
+      key: IntegrationTestKeys.iSendButtonKey,
       color: Theme.of(context).colorScheme.secondary,
       onPressed: () {
         /// find selected request type
