@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "948387819949",
+    "project_id": "requester-dbd27",
+    "storage_bucket": "requester-dbd27.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:948387819949:android:efe8fb92c69fd70f54f124",
+        "android_client_info": {
+          "package_name": "efafi.mostafa.requester"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9OQjdPmn4cIMI3p-hkedmTfDzdElac_A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
