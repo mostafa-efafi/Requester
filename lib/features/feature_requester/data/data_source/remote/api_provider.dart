@@ -29,4 +29,39 @@ class ApiProvider {
       return DataFailed(response.error!);
     }
   }
+
+  /// api provider for [delete] request
+  Future<DataState<Response>> deleteMethod(String url) async {
+    final response =
+        await restApi.request(url, requestType: RequestType.deleteRequest);
+    if (response is DataSuccess) {
+      return response;
+    } else {
+      return DataFailed(response.error!);
+    }
+  }
+
+  /// api provider for [put] request
+  Future<DataState<Response>> putMethod(
+      {required String url, Map<String, dynamic>? body}) async {
+    final response = await restApi.request(url,
+        requestType: RequestType.putRequest, body: body);
+    if (response is DataSuccess) {
+      return response;
+    } else {
+      return DataFailed(response.error!);
+    }
+  }
+
+  /// api provider for [patch] request
+  Future<DataState<Response>> patchMethod(
+      {required String url, Map<String, dynamic>? body}) async {
+    final response = await restApi.request(url,
+        requestType: RequestType.patchRequest, body: body);
+    if (response is DataSuccess) {
+      return response;
+    } else {
+      return DataFailed(response.error!);
+    }
+  }
 }

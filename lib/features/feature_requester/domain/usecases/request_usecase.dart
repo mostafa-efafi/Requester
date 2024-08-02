@@ -10,6 +10,11 @@ abstract class RequestUsecase {
   Future<DataState<RequestResponsEntity>> getMothodUsecase(String url);
   Future<DataState<RequestResponsEntity>> postMethodUsecase(
       {required String url, Map<String, dynamic>? body});
+  Future<DataState<RequestResponsEntity>> putMethodUsecase(
+      {required String url, Map<String, dynamic>? body});
+  Future<DataState<RequestResponsEntity>> patchMethodUsecase(
+      {required String url, Map<String, dynamic>? body});
+  Future<DataState<RequestResponsEntity>> deleteMothodUsecase(String url);
 }
 
 class RequestUsecaseImpl extends RequestUsecase {
@@ -24,5 +29,22 @@ class RequestUsecaseImpl extends RequestUsecase {
   Future<DataState<RequestResponsEntity>> postMethodUsecase(
       {required String url, Map<String, dynamic>? body}) {
     return repository.fetchPostMethod(url: url, body: body);
+  }
+
+  @override
+  Future<DataState<RequestResponsEntity>> deleteMothodUsecase(String url) {
+    return repository.fetchDeleteMethod(url);
+  }
+
+  @override
+  Future<DataState<RequestResponsEntity>> patchMethodUsecase(
+      {required String url, Map<String, dynamic>? body}) {
+    return repository.fetchPatchMethod(url: url, body: body);
+  }
+
+  @override
+  Future<DataState<RequestResponsEntity>> putMethodUsecase(
+      {required String url, Map<String, dynamic>? body}) {
+    return repository.fetchPutMethod(url: url, body: body);
   }
 }
