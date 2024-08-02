@@ -29,23 +29,46 @@ class RestApi {
     final bool connectNetwork = await networkChecker.checkConnection();
     if (connectNetwork == true) {
       try {
-        if (requestType == RequestType.postRequest) {
-          response = await _postRequest(
-            url: url,
-            headers: headers,
-            body: body,
-          );
-        } else if (requestType == RequestType.fileRequest) {
-          response = await _postFileRequest(
-            url: url,
-            headers: headers,
-            body: body,
-          );
-        } else {
-          response = await _getRequest(
-            url: url,
-            headers: headers,
-          );
+        switch (requestType) {
+          case RequestType.postRequest:
+            response = await _postRequest(
+              url: url,
+              headers: headers,
+              body: body,
+            );
+            break;
+          case RequestType.fileRequest:
+            response = await _postFileRequest(
+              url: url,
+              headers: headers,
+              body: body,
+            );
+            break;
+          case RequestType.putRequest:
+            response = await _putRequest(
+              url: url,
+              headers: headers,
+              body: body,
+            );
+            break;
+          case RequestType.patchRequest:
+            response = await _patchRequest(
+              url: url,
+              headers: headers,
+              body: body,
+            );
+            break;
+          case RequestType.deleteRequest:
+            response = await _deleteRequest(
+              url: url,
+              headers: headers,
+            );
+            break;
+          default:
+            response = await _getRequest(
+              url: url,
+              headers: headers,
+            );
         }
       } on TimeoutException catch (e) {
         debugPrint(e.toString());
@@ -125,6 +148,69 @@ class RestApi {
     }).timeout(Constants.serverTimeout);
   }
 
+  /// put request method
+  Future<Response<dynamic>> _putRequest(
+      {required String url,
+      dynamic body,
+      Map<String, String>? headers,
+      CancelToken? cancellToken}) async {
+    return dio
+        .put(url,
+            data: body,
+            options: _makeOptions(headers: headers),
+            cancelToken: cancellToken)
+        .catchError((onError) {
+      return Response(
+          requestOptions: RequestOptions(
+            path: url,
+          ),
+          statusCode: 401);
+    }).timeout(Constants.serverTimeout);
+  }
+
+  /// panch request method
+  Future<Response<dynamic>> _patchRequest(
+      {required String url,
+      dynamic body,
+      Map<String, String>? headers,
+      CancelToken? cancellToken}) async {
+    return dio
+        .patch(url,
+            data: body,
+            options: _makeOptions(headers: headers),
+            cancelToken: cancellToken)
+        .catchError((onError) {
+      return Response(
+          requestOptions: RequestOptions(
+            path: url,
+          ),
+          statusCode: 401);
+    }).timeout(Constants.serverTimeout);
+  }
+
+  /// delete request method
+  Future<Response> _deleteRequest(
+      {required String url,
+      Map<String, String>? headers,
+      CancelToken? cancellToken}) async {
+    return dio
+        .delete(
+      url,
+      cancelToken: cancellToken,
+      options: _makeOptions(headers: headers),
+    )
+        .catchError((dynamic onError) {
+      if (CancelToken.isCancel(onError)) {
+        debugPrint(onError);
+      }
+      return Response(
+          requestOptions: RequestOptions(
+            path: url,
+          ),
+          statusCode: 401);
+    }).timeout(Constants.serverTimeout);
+  }
+
   @visibleForTesting
   String makeAlerts({Response? response}) {
     final ManageStatusCode manageSC = ManageStatusCode();
@@ -146,4 +232,11 @@ Options _makeOptions({Map<String, String>? headers}) {
       headers: headers);
 }
 
-enum RequestType { getRequest, postRequest, fileRequest }
+enum RequestType {
+  getRequest,
+  postRequest,
+  fileRequest,
+  putRequest,
+  patchRequest,
+  deleteRequest
+}

@@ -41,4 +41,54 @@ class RequestRepositoryImpl implements RequestRepository {
       return DataFailed(response.error!);
     }
   }
+
+  @override
+  Future<DataState<RequestResponsEntity>> fetchDeleteMethod(String url) async {
+    final response = await apiProvider.deleteMethod(url);
+    if (response is DataSuccess && response.data != null) {
+      try {
+        final RequestResponsEntity entity =
+            RequestReponseModel.fromResponse(response.data!);
+        return DataSuccess(entity);
+      } catch (e) {
+        return const DataFailed(Constants.noOutputExist);
+      }
+    } else {
+      return DataFailed(response.error!);
+    }
+  }
+
+  @override
+  Future<DataState<RequestResponsEntity>> fetchPatchMethod(
+      {required String url, Map<String, dynamic>? body}) async {
+    final response = await apiProvider.patchMethod(url: url, body: body);
+    if (response is DataSuccess && response.data != null) {
+      try {
+        final RequestResponsEntity entity =
+            RequestReponseModel.fromResponse(response.data!);
+        return DataSuccess(entity);
+      } catch (e) {
+        return const DataFailed(Constants.noOutputExist);
+      }
+    } else {
+      return DataFailed(response.error!);
+    }
+  }
+
+  @override
+  Future<DataState<RequestResponsEntity>> fetchPutMethod(
+      {required String url, Map<String, dynamic>? body}) async {
+    final response = await apiProvider.putMethod(url: url, body: body);
+    if (response is DataSuccess && response.data != null) {
+      try {
+        final RequestResponsEntity entity =
+            RequestReponseModel.fromResponse(response.data!);
+        return DataSuccess(entity);
+      } catch (e) {
+        return const DataFailed(Constants.noOutputExist);
+      }
+    } else {
+      return DataFailed(response.error!);
+    }
+  }
 }

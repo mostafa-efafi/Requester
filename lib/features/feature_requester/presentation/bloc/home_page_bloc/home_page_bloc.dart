@@ -19,27 +19,49 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
       late DataState<RequestResponsEntity> response;
 
       /// [loading] status first
-      emit(state.copyWith(newRequestStatus: RequestLoading()));
-      final sentParam = event.sentParam;
+      try {
+        emit(state.copyWith(newRequestStatus: RequestLoading()));
+        final sentParam = event.sentParam;
 
-      switch (sentParam.requestType) {
+        switch (sentParam.requestType) {
+          /// [get]
+          case RequestType.getRequest:
+            response = await usecaseImpl.getMothodUsecase(sentParam.url);
+            break;
 
-        /// [get]
-        case RequestType.getRequest:
-          response = await usecaseImpl.getMothodUsecase(sentParam.url);
-          break;
+          /// [post]
+          case RequestType.postRequest:
+            response = await usecaseImpl.postMethodUsecase(
+                url: sentParam.url, body: sentParam.postBody);
+            break;
 
-        /// [post]
-        case RequestType.postRequest:
-          response = await usecaseImpl.postMethodUsecase(
-              url: sentParam.url, body: sentParam.postBody);
-          break;
-        default:
-      }
-      if (response is DataSuccess) {
-        emit(state.copyWith(newRequestStatus: RequestLoaded(response.data!)));
-      } else {
-        emit(state.copyWith(newRequestStatus: RequestError(response.error!)));
+          /// [put]
+          case RequestType.putRequest:
+            response = await usecaseImpl.putMethodUsecase(
+                url: sentParam.url, body: sentParam.postBody);
+            break;
+
+          /// [patch]
+          case RequestType.patchRequest:
+            response = await usecaseImpl.postMethodUsecase(
+                url: sentParam.url, body: sentParam.postBody);
+            break;
+
+          /// [delete]
+          case RequestType.deleteRequest:
+            response = await usecaseImpl.getMothodUsecase(sentParam.url);
+            break;
+          default:
+            response = await usecaseImpl.getMothodUsecase(sentParam.url);
+            break;
+        }
+        if (response is DataSuccess) {
+          emit(state.copyWith(newRequestStatus: RequestLoaded(response.data!)));
+        } else {
+          emit(state.copyWith(newRequestStatus: RequestError(response.error!)));
+        }
+      } catch (e) {
+        emit(state.copyWith(newRequestStatus: RequestError(e.toString())));
       }
     });
   }

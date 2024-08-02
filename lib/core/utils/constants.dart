@@ -19,8 +19,20 @@ class Constants {
   /// [public]
   static final initRequestTypeList = [
     RequestTypeParam(
-        title: 'Get', requestType: RequestType.getRequest, isSelected: true),
-    RequestTypeParam(title: 'Post', requestType: RequestType.postRequest)
+        title: 'Get',
+        requestType: RequestType.getRequest,
+        isSelected: true,
+        withBody: false),
+    RequestTypeParam(
+        title: 'Post', requestType: RequestType.postRequest, withBody: true),
+    RequestTypeParam(
+        title: 'Put', requestType: RequestType.putRequest, withBody: true),
+    RequestTypeParam(
+        title: 'Patch', requestType: RequestType.patchRequest, withBody: true),
+    RequestTypeParam(
+        title: 'Delete',
+        requestType: RequestType.deleteRequest,
+        withBody: false),
   ];
 
   static const sampleJson = {
