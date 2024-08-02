@@ -15,7 +15,9 @@ class BodyFieldsGenerator extends StatelessWidget {
       builder: (context, state) {
         final selectedParam =
             state.firstWhere((element) => element.isSelected == true);
-        return selectedParam.requestType == RequestType.postRequest
+        return selectedParam.requestType == RequestType.postRequest ||
+                selectedParam.requestType == RequestType.putRequest ||
+                selectedParam.requestType == RequestType.patchRequest
             ? Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Column(

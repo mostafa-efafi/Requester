@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:requester/config/languages/en.dart';
 import 'package:requester/core/params/sent_param.dart';
-import 'package:requester/core/rest/rest_api.dart';
 import 'package:requester/core/utils/constants.dart';
 import 'package:requester/core/utils/itegration_test_keys.dart';
 import 'package:requester/core/utils/snack_bar_tools.dart';
@@ -101,7 +100,7 @@ class _HomePageState extends State<HomePage> {
         final sentParam = SentParam(
             requestType: requestTypeParam.requestType,
             url: urlTextController.text,
-            postBody: requestTypeParam.requestType == RequestType.postRequest &&
+            postBody: requestTypeParam.withBody == true &&
                     postBodyTextController.text != ''
                 ? json.decode(postBodyTextController.text)
                 : null);
