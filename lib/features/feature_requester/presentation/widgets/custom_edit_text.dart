@@ -1,5 +1,7 @@
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
+import 'package:requester/config/languages/en.dart';
+import 'package:requester/features/feature_requester/presentation/widgets/request_type_dropdown.dart';
 
 class CustomEditText extends StatelessWidget {
   final TextEditingController controller;
@@ -25,14 +27,15 @@ class CustomEditText extends StatelessWidget {
         decoration: InputDecoration(
             enabledBorder: const OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.transparent, width: 0.0),
-                borderRadius: BorderRadius.all(Radius.circular(5))),
+                borderRadius: BorderRadius.all(Radius.circular(15))),
             border: const OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(5)),
+              borderRadius: BorderRadius.all(Radius.circular(15)),
               borderSide: BorderSide(color: Colors.teal),
             ),
-            hintText: 'Enter URL',
+            hintText: En.enterUrl,
             hintStyle: const TextStyle(color: Colors.grey),
             suffixIcon: _pasteButton(),
+            prefixIcon: const RequestTypeDropDown(),
             labelStyle: const TextStyle(color: Colors.grey),
             fillColor: Colors.white,
             filled: true,
@@ -50,13 +53,14 @@ class CustomEditText extends StatelessWidget {
         });
       },
       child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 4),
-        decoration: const BoxDecoration(
-            color: Color(0x11000000), shape: BoxShape.circle),
+        margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+        decoration: BoxDecoration(
+            color: const Color(0x11000000),
+            borderRadius: BorderRadius.circular(10)),
         child: Icon(
           Icons.paste_rounded,
-          size: 25,
-          color: Colors.grey.shade800,
+          size: 23,
+          color: Colors.grey.shade700,
         ),
       ),
     );
