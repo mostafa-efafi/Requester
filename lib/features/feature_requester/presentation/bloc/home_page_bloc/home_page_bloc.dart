@@ -1,5 +1,8 @@
+// ignore_for_file: unused_element
+// ignore: depend_on_referenced_packages
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:requester/core/params/sent_param.dart';
 import 'package:requester/core/resource/data_state.dart';
 import 'package:requester/core/rest/rest_api.dart';
@@ -12,6 +15,7 @@ part 'home_page_state.dart';
 
 class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
   final RequestUsecaseImpl usecaseImpl;
+  TabController? tabController;
   HomePageBloc(this.usecaseImpl)
       : super(HomePageState(requestStatus: RequestNoAction())) {
     // Send request to server event
@@ -56,6 +60,8 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
             break;
         }
         if (response is DataSuccess) {
+          /// animated to second fragment for show api result
+          tabController!.animateTo(1);
           emit(state.copyWith(newRequestStatus: RequestLoaded(response.data!)));
         } else {
           emit(state.copyWith(newRequestStatus: RequestError(response.error!)));

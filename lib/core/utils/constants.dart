@@ -19,18 +19,18 @@ class Constants {
   /// [public]
   static final initRequestTypeList = [
     RequestTypeParam(
-        title: 'Get',
+        title: 'GET',
         requestType: RequestType.getRequest,
         isSelected: true,
         withBody: false),
     RequestTypeParam(
-        title: 'Post', requestType: RequestType.postRequest, withBody: true),
+        title: 'POST', requestType: RequestType.postRequest, withBody: true),
     RequestTypeParam(
-        title: 'Put', requestType: RequestType.putRequest, withBody: true),
+        title: 'PUT', requestType: RequestType.putRequest, withBody: true),
     RequestTypeParam(
-        title: 'Patch', requestType: RequestType.patchRequest, withBody: true),
+        title: 'PATCH', requestType: RequestType.patchRequest, withBody: true),
     RequestTypeParam(
-        title: 'Delete',
+        title: 'DELETE',
         requestType: RequestType.deleteRequest,
         withBody: false),
   ];
