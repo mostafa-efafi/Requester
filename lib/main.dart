@@ -2,9 +2,12 @@ import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:requester/config/app_theme.dart';
 import 'package:requester/config/languages/en.dart';
 import 'package:requester/di.dart';
+import 'package:requester/features/feature_requester/presentation/bloc/home_page_bloc/home_page_bloc.dart';
+import 'package:requester/features/feature_requester/presentation/bloc/request_type_list_cubit.dart';
 import 'package:requester/firebase_options.dart';
 
 import 'features/feature_requester/presentation/pages/home_page.dart';
@@ -30,7 +33,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: En.appName,
       theme: appThemeData(),
-      home: const HomePage(),
+      home: MultiBlocProvider(providers: [
+        BlocProvider(create: (_) => di<RequestTypeListCubit>()),
+        BlocProvider(create: (_) => di<HomePageBloc>())
+      ], child: const HomePage()),
     );
   }
 }
