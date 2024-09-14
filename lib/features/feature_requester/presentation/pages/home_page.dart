@@ -3,8 +3,8 @@ import 'package:requester/core/utils/constants.dart';
 import 'package:requester/core/widgets/appbar_widget.dart';
 import 'package:requester/di.dart';
 import 'package:requester/features/feature_requester/presentation/bloc/home_page_bloc/home_page_bloc.dart';
-import 'package:requester/features/feature_requester/presentation/widgets/input_data_fragment.dart';
-import 'package:requester/features/feature_requester/presentation/widgets/result_fragment.dart';
+import 'package:requester/features/feature_requester/presentation/widgets/fragments/input_data_fragment.dart';
+import 'package:requester/features/feature_requester/presentation/widgets/fragments/result_fragment.dart';
 import 'package:requester/features/feature_requester/presentation/widgets/send_button.dart';
 
 class HomePage extends StatefulWidget {
