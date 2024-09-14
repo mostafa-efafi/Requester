@@ -16,7 +16,7 @@ class RequestTypeDropDown extends StatelessWidget {
         return Container(
           // padding: const EdgeInsets.symmetric(vertical: 2),
           margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 4),
-          width: 80,
+          width: 85,
           height: 40,
           decoration: BoxDecoration(
               color: Theme.of(context).primaryColor,
@@ -31,7 +31,7 @@ class RequestTypeDropDown extends StatelessWidget {
             hint: Center(
                 child: Text(
               state.first.title,
-              style: const TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white ,),
             )),
             // Hide the default underline
             underline: Container(),
@@ -64,6 +64,7 @@ class RequestTypeDropDown extends StatelessWidget {
                         e.title,
                         style: const TextStyle(
                           color: Colors.white,
+                          fontSize: 14
                         ),
                       ),
                     ))
