@@ -6,7 +6,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:requester/config/app_theme.dart';
 import 'package:requester/config/languages/en.dart';
 import 'package:requester/di.dart';
+import 'package:requester/features/feature_requester/presentation/bloc/header_fragment_cubit/header_fragment_cubit.dart';
 import 'package:requester/features/feature_requester/presentation/bloc/home_page_bloc/home_page_bloc.dart';
+import 'package:requester/features/feature_requester/presentation/bloc/query_fragment_cubit/query_fragment_cubit.dart';
 import 'package:requester/features/feature_requester/presentation/bloc/request_type_list_cubit.dart';
 import 'package:requester/firebase_options.dart';
 
@@ -35,7 +37,9 @@ class MyApp extends StatelessWidget {
       theme: appThemeData(),
       home: MultiBlocProvider(providers: [
         BlocProvider(create: (_) => di<RequestTypeListCubit>()),
-        BlocProvider(create: (_) => di<HomePageBloc>())
+        BlocProvider(create: (_) => di<HomePageBloc>()),
+        BlocProvider(create: (_) => di<QueryFragmentCubit>()),
+        BlocProvider(create: (_) => di<HeaderFragmentCubit>())
       ], child: const HomePage()),
     );
   }

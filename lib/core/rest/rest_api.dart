@@ -19,7 +19,7 @@ class RestApi {
   Future<DataState<Response>> request(String url,
       {RequestType requestType = RequestType.getRequest,
       var body,
-      Map<String, String>? headers,
+      Map<String, dynamic>? headers,
       Map<String, dynamic>? queryParameters}) async {
     /// added [http] to url
     url = TextTools.makestandardUrl(url);
@@ -91,7 +91,7 @@ class RestApi {
   Future<Response<dynamic>> _postFileRequest(
       {required String url,
       required FormData body,
-      Map<String, String>? headers,
+      Map<String, dynamic>? headers,
       CancelToken? cancellToken}) async {
     var response = await dio.post(url,
         data: body,
@@ -105,7 +105,7 @@ class RestApi {
   /// get request method
   Future<Response> _getRequest(
       {required String url,
-      Map<String, String>? headers,
+      Map<String, dynamic>? headers,
       CancelToken? cancellToken,
       Map<String, dynamic>? queryParameters}) async {
     return dio
@@ -131,7 +131,7 @@ class RestApi {
   Future<Response<dynamic>> _postRequest(
       {required String url,
       dynamic body,
-      Map<String, String>? headers,
+      Map<String, dynamic>? headers,
       CancelToken? cancellToken}) async {
     return dio
         .post(url,
@@ -151,7 +151,7 @@ class RestApi {
   Future<Response<dynamic>> _putRequest(
       {required String url,
       dynamic body,
-      Map<String, String>? headers,
+      Map<String, dynamic>? headers,
       CancelToken? cancellToken}) async {
     return dio
         .put(url,
@@ -171,7 +171,7 @@ class RestApi {
   Future<Response<dynamic>> _patchRequest(
       {required String url,
       dynamic body,
-      Map<String, String>? headers,
+      Map<String, dynamic>? headers,
       CancelToken? cancellToken}) async {
     return dio
         .patch(url,
@@ -190,7 +190,7 @@ class RestApi {
   /// delete request method
   Future<Response> _deleteRequest(
       {required String url,
-      Map<String, String>? headers,
+      Map<String, dynamic>? headers,
       CancelToken? cancellToken}) async {
     return dio
         .delete(
@@ -222,7 +222,7 @@ class RestApi {
   }
 }
 
-Options _makeOptions({Map<String, String>? headers}) {
+Options _makeOptions({Map<String, dynamic>? headers}) {
   return Options(
       receiveDataWhenStatusError: true,
       receiveTimeout: Constants.serverTimeout,

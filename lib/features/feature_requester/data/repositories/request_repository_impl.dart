@@ -100,7 +100,16 @@ class RequestRepositoryImpl extends RequestRepository {
 List<Map<String, dynamic>> _inputGenerator(
     InputFragmentCubitParam? inputCubits) {
   Map<String, dynamic> query = <String, dynamic>{};
+  Map<String, dynamic> header = <String, dynamic>{};
+
+  /// Query
   inputCubits?.query?.state.queryParamsList!.removeWhere((e) =>
+      e.parameter == null ||
+      e.value == null ||
+      e.parameter == '' ||
+      e.value == '');
+  // Header
+  inputCubits?.header?.state.headerParamsList!.removeWhere((e) =>
       e.parameter == null ||
       e.value == null ||
       e.parameter == '' ||
@@ -109,7 +118,10 @@ List<Map<String, dynamic>> _inputGenerator(
     inputCubits?.query?.state.queryParamsList?.forEach((e) {
       query[e.parameter!] = e.value;
     });
-    return [query];
+    inputCubits?.header?.state.headerParamsList?.forEach((e) {
+      header[e.parameter!] = e.value;
+    });
+    return [query, header];
   } catch (e) {
     debugPrint(e.toString());
     return [];

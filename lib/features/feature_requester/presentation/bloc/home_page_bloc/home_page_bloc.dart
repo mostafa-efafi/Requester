@@ -9,6 +9,7 @@ import 'package:requester/core/resource/data_state.dart';
 import 'package:requester/core/rest/rest_api.dart';
 import 'package:requester/features/feature_requester/domain/entities/request_reponse_entity.dart';
 import 'package:requester/features/feature_requester/domain/usecases/request_usecase.dart';
+import 'package:requester/features/feature_requester/presentation/bloc/header_fragment_cubit/header_fragment_cubit.dart';
 import 'package:requester/features/feature_requester/presentation/bloc/home_page_bloc/request_status.dart';
 import 'package:requester/features/feature_requester/presentation/bloc/query_fragment_cubit/query_fragment_cubit.dart';
 
@@ -18,12 +19,14 @@ part 'home_page_state.dart';
 class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
   final RequestUsecaseImpl requestUsecase;
   final QueryFragmentCubit queryCubit;
+  final HeaderFragmentCubit headerCubit;
   TabController? tabController;
-  HomePageBloc(this.requestUsecase, this.queryCubit)
+  HomePageBloc(this.requestUsecase, this.queryCubit, this.headerCubit)
       : super(HomePageState(requestStatus: RequestNoAction())) {
     // Send request to server event
     on<SendRequestEvent>((event, emit) async {
-      final inputCubits = InputFragmentCubitParam(query: queryCubit);
+      final inputCubits =
+          InputFragmentCubitParam(query: queryCubit, header: headerCubit);
       late DataState<RequestResponsEntity> response;
 
       /// [loading] status first
@@ -34,13 +37,14 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
         switch (sentParam.requestType) {
           /// [get]
           case RequestType.getRequest:
-            response = await requestUsecase.getMothodUsecase(sentParam.url , inputCubits);
+            response = await requestUsecase.getMothodUsecase(
+                sentParam.url, inputCubits);
             break;
 
           /// [post]
           case RequestType.postRequest:
-            response = await requestUsecase.postMethodUsecase(
-                 sentParam.url/* , sentParam.postBody */);
+            response = await requestUsecase
+                .postMethodUsecase(sentParam.url /* , sentParam.postBody */);
             break;
 
           /// [put]
@@ -52,15 +56,18 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
           /// [patch]
           case RequestType.patchRequest:
             response = await requestUsecase.postMethodUsecase(
-                 sentParam.url, /* sentParam.postBody */);
+              sentParam.url, /* sentParam.postBody */
+            );
             break;
 
           /// [delete]
           case RequestType.deleteRequest:
-            response = await requestUsecase.getMothodUsecase(sentParam.url , inputCubits);
+            response = await requestUsecase.getMothodUsecase(
+                sentParam.url, inputCubits);
             break;
           default:
-            response = await requestUsecase.getMothodUsecase(sentParam.url , inputCubits);
+            response = await requestUsecase.getMothodUsecase(
+                sentParam.url, inputCubits);
             break;
         }
         if (response is DataSuccess) {
