@@ -4,6 +4,7 @@ import 'package:requester/config/languages/en.dart';
 import 'package:requester/core/widgets/custom_textfield.dart';
 import 'package:requester/di.dart';
 import 'package:requester/features/feature_requester/presentation/bloc/query_fragment_cubit/query_fragment_cubit.dart';
+import 'package:requester/features/feature_requester/presentation/widgets/fragment_header_widget.dart';
 
 class QueryFragment extends StatelessWidget {
   const QueryFragment({super.key});
@@ -13,7 +14,9 @@ class QueryFragment extends StatelessWidget {
     return Column(
       children: [
         // title widget
-        _titleWidget(),
+        const FragmentHeaderWidget(
+          title: En.queryParameters,
+        ),
         // list of Query Parameters
         Expanded(
           child: BlocConsumer<QueryFragmentCubit, QueryFragmentState>(
@@ -63,24 +66,6 @@ class QueryFragment extends StatelessWidget {
           ),
         )
       ],
-    );
-  }
-
-  Padding _titleWidget() {
-    return Padding(
-      padding: const EdgeInsets.all(15.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Text(
-            En.queryParameters,
-            style: TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
-                color: Colors.grey.shade600),
-          ),
-        ],
-      ),
     );
   }
 }
