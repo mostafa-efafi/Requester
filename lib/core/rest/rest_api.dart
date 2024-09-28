@@ -16,12 +16,11 @@ class RestApi {
   RestApi(this.networkChecker);
 
   /// The main method for sending requests includes all types of [get] , [post] and...
-  Future<DataState<Response>> request(
-    String url, {
-    RequestType requestType = RequestType.getRequest,
-    var body,
-    Map<String, String>? headers,
-  }) async {
+  Future<DataState<Response>> request(String url,
+      {RequestType requestType = RequestType.getRequest,
+      var body,
+      Map<String, String>? headers,
+      Map<String, dynamic>? queryParameters}) async {
     /// added [http] to url
     url = TextTools.makestandardUrl(url);
 
@@ -66,9 +65,7 @@ class RestApi {
             break;
           default:
             response = await _getRequest(
-              url: url,
-              headers: headers,
-            );
+                url: url, headers: headers, queryParameters: queryParameters);
         }
       } on TimeoutException catch (e) {
         debugPrint(e.toString());
@@ -109,11 +106,13 @@ class RestApi {
   Future<Response> _getRequest(
       {required String url,
       Map<String, String>? headers,
-      CancelToken? cancellToken}) async {
+      CancelToken? cancellToken,
+      Map<String, dynamic>? queryParameters}) async {
     return dio
         .get(
       url,
       cancelToken: cancellToken,
+      queryParameters: queryParameters,
       options: _makeOptions(headers: headers),
     )
         .catchError((dynamic onError) {
