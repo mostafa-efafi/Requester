@@ -1,18 +1,18 @@
 // ignore: depend_on_referenced_packages
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:requester/core/params/query_data_param.dart';
+import 'package:requester/core/params/input_field_data_param.dart';
 
 part 'query_fragment_state.dart';
 
 class QueryFragmentCubit extends Cubit<QueryFragmentState> {
   QueryFragmentCubit()
       : super(QueryFragmentState(
-          queryParamsList: [QueryDataParam()],
+          queryParamsList: [InputFieldDataParam()],
         ));
 
   void editParameter(String text, int index) {
-    List<QueryDataParam> newList = List.from(state.queryParamsList!);
+    List<InputFieldDataParam> newList = List.from(state.queryParamsList!);
     newList[index].parameter = text;
     emit(state.copyWith(
         newQueryParamsList: newList,
@@ -20,7 +20,7 @@ class QueryFragmentCubit extends Cubit<QueryFragmentState> {
   }
 
   void editValue(String text, int index) {
-    List<QueryDataParam> newList = List.from(state.queryParamsList!);
+    List<InputFieldDataParam> newList = List.from(state.queryParamsList!);
     newList[index].value = text;
     emit(state.copyWith(
         newQueryParamsList: newList,
@@ -28,8 +28,8 @@ class QueryFragmentCubit extends Cubit<QueryFragmentState> {
   }
 
   void addNewQuery() {
-    final List<QueryDataParam> newList = List.from(state.queryParamsList!)
-      ..add(QueryDataParam());
+    final List<InputFieldDataParam> newList = List.from(state.queryParamsList!)
+      ..add(InputFieldDataParam());
     emit(state.copyWith(
         newQueryParamsList: newList,
         newIsRefresh: !(state.isRefresh ?? false)));
