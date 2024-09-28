@@ -15,6 +15,7 @@ class Constants {
 
   /// [colors]
   static final scaffoldBackgroundColor = Colors.grey.shade200;
+  static final fragmentHeaderTitleColor = Colors.grey.shade600;
 
   /// [public]
   static final initRequestTypeList = [

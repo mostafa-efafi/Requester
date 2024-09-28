@@ -11,4 +11,6 @@ class En {
   static const queryParameters = 'Query Parameters';
   static const parameter = 'parameter';
   static const value = 'value';
+  static const hTTPHeaders = 'HTTP Headers';
+  static const header = 'header';
 }

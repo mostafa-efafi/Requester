@@ -2,11 +2,11 @@
 
 import 'package:equatable/equatable.dart';
 
-class QueryDataParam extends Equatable {
+class InputFieldDataParam extends Equatable {
   String? parameter;
   String? value;
 
-  QueryDataParam({this.parameter, this.value});
+  InputFieldDataParam({this.parameter, this.value});
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
