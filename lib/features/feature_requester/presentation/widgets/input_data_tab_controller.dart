@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:requester/config/languages/en.dart';
-import 'package:requester/core/widgets/costume_tabbar_view.dart';
+import 'package:requester/core/widgets/custom_tabbar_view.dart';
 import 'package:requester/core/widgets/tabbar_outline_Indicator.dart';
 import 'package:requester/features/feature_requester/presentation/widgets/fragments/input_fragments/auth_fragment.dart';
 import 'package:requester/features/feature_requester/presentation/widgets/fragments/input_fragments/body_fragment.dart';

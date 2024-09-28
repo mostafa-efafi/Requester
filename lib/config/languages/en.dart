@@ -8,4 +8,7 @@ class En {
   static const headers = 'Headers';
   static const auth = 'Auth';
   static const body = 'Body';
+  static const queryParameters = 'Query Parameters';
+  static const parameter = 'parameter';
+  static const value = 'value';
 }

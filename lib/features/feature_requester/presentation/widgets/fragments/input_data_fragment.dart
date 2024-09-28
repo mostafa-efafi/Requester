@@ -6,7 +6,7 @@ import 'package:requester/core/utils/itegration_test_keys.dart';
 import 'package:requester/core/utils/snack_bar_tools.dart';
 import 'package:requester/features/feature_requester/presentation/bloc/home_page_bloc/home_page_bloc.dart';
 import 'package:requester/features/feature_requester/presentation/bloc/home_page_bloc/request_status.dart';
-import 'package:requester/features/feature_requester/presentation/widgets/custom_edit_text.dart';
+import 'package:requester/features/feature_requester/presentation/widgets/url_text_field.dart';
 import 'package:requester/features/feature_requester/presentation/widgets/input_data_tab_controller.dart';
 
 class InputDataFragment extends StatelessWidget {
@@ -42,7 +42,7 @@ class InputDataFragment extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   const SizedBox(height: 10),
-                  CustomEditText(
+                  UrlTextField(
                     controller: urlTextController,
                     key: IntegrationTestKeys.iEditTextKey,
                   ),

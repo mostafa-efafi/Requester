@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:requester/config/languages/en.dart';
-import 'package:requester/core/widgets/costume_tabbar_view.dart';
+import 'package:requester/core/widgets/custom_tabbar_view.dart';
 import 'package:requester/core/widgets/tabbar_outline_Indicator.dart';
 
 class AuthFragment extends StatelessWidget {
