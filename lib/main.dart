@@ -10,6 +10,7 @@ import 'package:requester/features/feature_requester/presentation/bloc/header_fr
 import 'package:requester/features/feature_requester/presentation/bloc/home_page_bloc/home_page_bloc.dart';
 import 'package:requester/features/feature_requester/presentation/bloc/query_fragment_cubit/query_fragment_cubit.dart';
 import 'package:requester/features/feature_requester/presentation/bloc/request_type_list_cubit.dart';
+import 'package:requester/features/feature_requester/presentation/bloc/result_fragment_cubit/result_fragment_cubit.dart';
 import 'package:requester/firebase_options.dart';
 
 import 'features/feature_requester/presentation/pages/home_page.dart';
@@ -39,7 +40,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => di<RequestTypeListCubit>()),
         BlocProvider(create: (_) => di<HomePageBloc>()),
         BlocProvider(create: (_) => di<QueryFragmentCubit>()),
-        BlocProvider(create: (_) => di<HeaderFragmentCubit>())
+        BlocProvider(create: (_) => di<HeaderFragmentCubit>()),
+        BlocProvider(create: (_) => di<ResultFragmentCubit>())
       ], child: const HomePage()),
     );
   }

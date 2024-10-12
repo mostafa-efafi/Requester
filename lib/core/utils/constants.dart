@@ -14,6 +14,8 @@ class Constants {
   static const serverTimeout = Duration(seconds: 20);
 
   /// [colors]
+  static const primaryColor = Colors.teal;
+  static const secondaryColor = Colors.amber;
   static final scaffoldBackgroundColor = Colors.grey.shade200;
   static final fragmentHeaderTitleColor = Colors.grey.shade600;
 
