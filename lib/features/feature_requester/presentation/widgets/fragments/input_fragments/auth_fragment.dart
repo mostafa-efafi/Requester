@@ -32,22 +32,27 @@ class AuthFragment extends StatelessWidget {
               CostumeTabBarView(
                 title: 'Basic',
                 fontSize: 12,
+                mini: true,
               ),
               CostumeTabBarView(
                 title: 'Bearer',
                 fontSize: 12,
+                mini: true,
               ),
               CostumeTabBarView(
                 title: 'OAuth 2',
                 fontSize: 12,
+                mini: true,
               ),
               CostumeTabBarView(
                 title: 'NTLM',
                 fontSize: 12,
+                mini: true,
               ),
               CostumeTabBarView(
                 title: 'AWS',
                 fontSize: 12,
+                mini: true,
               ),
             ],
           ),
