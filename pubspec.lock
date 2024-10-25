@@ -217,6 +217,22 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.0.5"
+  extended_text_field:
+    dependency: transitive
+    description:
+      name: extended_text_field
+      sha256: "954c7eea1e82728a742f7ddf09b9a51cef087d4f52b716ba88cb3eb78ccd7c6e"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "15.0.0"
+  extended_text_library:
+    dependency: transitive
+    description:
+      name: extended_text_library
+      sha256: "55d09098ec56fab0d9a8a68950ca0bbf2efa1327937f7cec6af6dfa066234829"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "12.0.0"
   fake_async:
     dependency: transitive
     description:
@@ -407,6 +423,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "4.8.0"
+  json_text_field:
+    dependency: "direct main"
+    description:
+      name: json_text_field
+      sha256: d922cf02d5807c3971d57e1ba5463c68b98650e8913163e7391cdb31c6af3ae4
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.2.0"
   leak_tracker:
     dependency: transitive
     description:
