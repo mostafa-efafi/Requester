@@ -7,20 +7,22 @@ class CustomTextField extends StatelessWidget {
   final Widget? suffixIcon;
   final Widget? prefixIcon;
   final String? hintText;
+  final int? maxLines;
   const CustomTextField(
       {super.key,
-       this.controller,
+      this.controller,
       this.onChange,
       this.errorText,
       this.suffixIcon,
       this.prefixIcon,
-      this.hintText});
+      this.hintText,
+      this.maxLines});
 
   @override
   Widget build(BuildContext context) {
     return TextField(
       keyboardType: TextInputType.multiline,
-      maxLines: null,
+      maxLines: maxLines,
       controller: controller,
       onChanged: onChange,
       enableInteractiveSelection: true,
