@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:requester/config/app_theme.dart';
 import 'package:requester/config/languages/en.dart';
 import 'package:requester/di.dart';
+import 'package:requester/features/feature_requester/presentation/bloc/auth_all_fragments_cubit/auth_all_fragments_cubit.dart';
 import 'package:requester/features/feature_requester/presentation/bloc/header_fragment_cubit/header_fragment_cubit.dart';
 import 'package:requester/features/feature_requester/presentation/bloc/home_page_bloc/home_page_bloc.dart';
 import 'package:requester/features/feature_requester/presentation/bloc/query_fragment_cubit/query_fragment_cubit.dart';
@@ -41,7 +42,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => di<HomePageBloc>()),
         BlocProvider(create: (_) => di<QueryFragmentCubit>()),
         BlocProvider(create: (_) => di<HeaderFragmentCubit>()),
-        BlocProvider(create: (_) => di<ResultFragmentCubit>())
+        BlocProvider(create: (_) => di<ResultFragmentCubit>()),
+        BlocProvider(create: (_) => di<AuthAllFragmentsCubit>()),
       ], child: const HomePage()),
     );
   }

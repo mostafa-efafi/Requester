@@ -7,7 +7,7 @@ import 'package:requester/features/feature_requester/presentation/widgets/fragme
 import 'package:requester/features/feature_requester/presentation/widgets/fragments/input_fragments/headers_fragment.dart';
 import 'package:requester/features/feature_requester/presentation/widgets/fragments/input_fragments/query_fragment.dart';
 
-class InputDataTabController extends StatelessWidget {
+class InputDataTabController extends StatelessWidget  {
   const InputDataTabController({super.key});
 
   @override

@@ -9,6 +9,7 @@ import 'package:requester/core/resource/data_state.dart';
 import 'package:requester/core/rest/rest_api.dart';
 import 'package:requester/features/feature_requester/domain/entities/request_reponse_entity.dart';
 import 'package:requester/features/feature_requester/domain/usecases/request_usecase.dart';
+import 'package:requester/features/feature_requester/presentation/bloc/auth_all_fragments_cubit/auth_all_fragments_cubit.dart';
 import 'package:requester/features/feature_requester/presentation/bloc/header_fragment_cubit/header_fragment_cubit.dart';
 import 'package:requester/features/feature_requester/presentation/bloc/home_page_bloc/request_status.dart';
 import 'package:requester/features/feature_requester/presentation/bloc/query_fragment_cubit/query_fragment_cubit.dart';
@@ -20,13 +21,15 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
   final RequestUsecaseImpl requestUsecase;
   final QueryFragmentCubit queryCubit;
   final HeaderFragmentCubit headerCubit;
+  final AuthAllFragmentsCubit authCubit;
   TabController? tabController;
-  HomePageBloc(this.requestUsecase, this.queryCubit, this.headerCubit)
+  HomePageBloc(
+      this.requestUsecase, this.queryCubit, this.headerCubit, this.authCubit)
       : super(HomePageState(requestStatus: RequestNoAction())) {
     // Send request to server event
     on<SendRequestEvent>((event, emit) async {
-      final inputCubits =
-          InputFragmentCubitParam(query: queryCubit, header: headerCubit);
+      final inputCubits = InputFragmentCubitParam(
+          query: queryCubit, header: headerCubit, auth: authCubit);
       late DataState<RequestResponsEntity> response;
 
       /// [loading] status first

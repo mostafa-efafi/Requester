@@ -13,4 +13,15 @@ class En {
   static const value = 'value';
   static const hTTPHeaders = 'HTTP Headers';
   static const header = 'header';
+  static const basicAuthentication = 'Basic Authentication';
+  static const username = 'username';
+  static const password = 'password';
+  static const bearerAuthentication = 'Bearer Token';
+  static var token = 'token';
+  static const nextVersionFuture =
+      'This feature will be added in future versions';
+  static const oAuth1Authentication = 'OAuth 1 Authentication';
+  static const jwtAuthentication = 'JWT Bearer Authentication';
+  static const awsAuthentication = 'AWS Authentication';
+  static const jsonContent = 'JSON Content';
 }
