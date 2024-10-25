@@ -8,9 +8,12 @@ class ApiProvider {
   ApiProvider(this.restApi);
 
   /// api provider for [get] request
-  Future<DataState<Response>> getMethod(String url) async {
-    final response =
-        await restApi.request(url, requestType: RequestType.getRequest);
+  Future<DataState<Response>> getMethod(
+      String url, List<Map<String, dynamic>> inputs) async {
+    final response = await restApi.request(url,
+        requestType: RequestType.getRequest,
+        queryParameters: inputs[0],
+        headers: inputs[1]);
     if (response is DataSuccess) {
       return response;
     } else {

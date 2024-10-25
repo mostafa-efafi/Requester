@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:requester/core/utils/constants.dart';
 
 ThemeData appThemeData({BuildContext? context}) {
   return ThemeData(
     fontFamily: 'Vazir',
-    primaryColor: Colors.teal,
+    useMaterial3: true,
+    primaryColor: Constants.primaryColor,
+    secondaryHeaderColor: Constants.secondaryColor,
     colorScheme: ColorScheme.fromSwatch().copyWith(
-      secondary: Colors.amber,
-      primary: Colors.teal,
+      secondary: Constants.secondaryColor,
+      primary: Constants.primaryColor,
       brightness: Brightness.light,
     ),
     brightness: Brightness.light,
-    unselectedWidgetColor: Colors.grey[600],
+    unselectedWidgetColor: Constants.fragmentHeaderTitleColor,
   );
 }

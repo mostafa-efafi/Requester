@@ -1,242 +1,139 @@
-// ignore_for_file: invalid_visibility_annotation
-
 import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:requester/core/resource/data_state.dart';
-import 'package:requester/core/rest/manage_status_code.dart';
 import 'package:requester/core/rest/network_checker.dart';
-import 'package:requester/core/utils/constants.dart';
 import 'package:requester/core/utils/text_tools.dart';
 
-class RestApi {
+// Interfaces
+abstract class IHttpClient {
+  Future<Response<dynamic>> get(String url,
+      {Map<String, dynamic>? headers, Map<String, dynamic>? queryParameters});
+  Future<Response<dynamic>> post(String url,
+      {dynamic body, Map<String, dynamic>? headers});
+  Future<Response<dynamic>> put(String url,
+      {dynamic body, Map<String, dynamic>? headers});
+  Future<Response<dynamic>> patch(String url,
+      {dynamic body, Map<String, dynamic>? headers});
+  Future<Response<dynamic>> delete(String url, {Map<String, dynamic>? headers});
+}
+
+abstract class IErrorManager {
+  void handleError(Response response);
+}
+
+// Concrete Implementation for HttpClient
+class DioHttpClient implements IHttpClient {
   final Dio dio = Dio();
-  final NetworkChecker networkChecker;
 
-  RestApi(this.networkChecker);
-
-  /// The main method for sending requests includes all types of [get] , [post] and...
-  Future<DataState<Response>> request(
-    String url, {
-    RequestType requestType = RequestType.getRequest,
-    var body,
-    Map<String, String>? headers,
-  }) async {
-    /// added [http] to url
-    url = TextTools.makestandardUrl(url);
-
-    Response<dynamic> response;
-    final bool connectNetwork = await networkChecker.checkConnection();
-    if (connectNetwork == true) {
-      try {
-        switch (requestType) {
-          case RequestType.postRequest:
-            response = await _postRequest(
-              url: url,
-              headers: headers,
-              body: body,
-            );
-            break;
-          case RequestType.fileRequest:
-            response = await _postFileRequest(
-              url: url,
-              headers: headers,
-              body: body,
-            );
-            break;
-          case RequestType.putRequest:
-            response = await _putRequest(
-              url: url,
-              headers: headers,
-              body: body,
-            );
-            break;
-          case RequestType.patchRequest:
-            response = await _patchRequest(
-              url: url,
-              headers: headers,
-              body: body,
-            );
-            break;
-          case RequestType.deleteRequest:
-            response = await _deleteRequest(
-              url: url,
-              headers: headers,
-            );
-            break;
-          default:
-            response = await _getRequest(
-              url: url,
-              headers: headers,
-            );
-        }
-      } on TimeoutException catch (e) {
-        debugPrint(e.toString());
-        return const DataFailed('error ${Constants.poorConnectionDesc} ');
-      } catch (e) {
-        debugPrint('Error: $e');
-        return const DataFailed('error ${Constants.poorConnectionDesc} ');
-      }
-
-      if (response.statusCode != 200) {
-        makeAlerts(response: response);
-        // return const DataFailed(Constants.serverErrorDesc);
-      }
-
-      ///[decoded Result]
-      return DataSuccess(response);
-    } else {
-      return const DataFailed(Constants.noConnectToNetwork);
-    }
+  @override
+  Future<Response<dynamic>> get(String url,
+      {Map<String, dynamic>? headers, Map<String, dynamic>? queryParameters}) {
+    return dio.get(url,
+        options: Options(headers: headers), queryParameters: queryParameters);
   }
 
-  /// post file request method
-  Future<Response<dynamic>> _postFileRequest(
-      {required String url,
-      required FormData body,
-      Map<String, String>? headers,
-      CancelToken? cancellToken}) async {
-    var response = await dio.post(url,
-        data: body,
-        options: _makeOptions(headers: headers),
-        cancelToken: cancellToken, onSendProgress: (int sent, int total) {
-      debugPrint('$sent  =>>> $total');
-    });
-    return response;
+  @override
+  Future<Response<dynamic>> post(String url,
+      {dynamic body, Map<String, dynamic>? headers}) {
+    return dio.post(url, data: body, options: Options(headers: headers));
   }
 
-  /// get request method
-  Future<Response> _getRequest(
-      {required String url,
-      Map<String, String>? headers,
-      CancelToken? cancellToken}) async {
-    return dio
-        .get(
-      url,
-      cancelToken: cancellToken,
-      options: _makeOptions(headers: headers),
-    )
-        .catchError((dynamic onError) {
-      if (CancelToken.isCancel(onError)) {
-        debugPrint(onError);
-      }
-      return Response(
-          requestOptions: RequestOptions(
-            path: url,
-          ),
-          statusCode: 401);
-    }).timeout(Constants.serverTimeout);
+  @override
+  Future<Response<dynamic>> put(String url,
+      {dynamic body, Map<String, dynamic>? headers}) {
+    return dio.put(url, data: body, options: Options(headers: headers));
   }
 
-  /// post request method
-  Future<Response<dynamic>> _postRequest(
-      {required String url,
-      dynamic body,
-      Map<String, String>? headers,
-      CancelToken? cancellToken}) async {
-    return dio
-        .post(url,
-            data: body,
-            options: _makeOptions(headers: headers),
-            cancelToken: cancellToken)
-        .catchError((onError) {
-      return Response(
-          requestOptions: RequestOptions(
-            path: url,
-          ),
-          statusCode: 401);
-    }).timeout(Constants.serverTimeout);
+  @override
+  Future<Response<dynamic>> patch(String url,
+      {dynamic body, Map<String, dynamic>? headers}) {
+    return dio.patch(url, data: body, options: Options(headers: headers));
   }
 
-  /// put request method
-  Future<Response<dynamic>> _putRequest(
-      {required String url,
-      dynamic body,
-      Map<String, String>? headers,
-      CancelToken? cancellToken}) async {
-    return dio
-        .put(url,
-            data: body,
-            options: _makeOptions(headers: headers),
-            cancelToken: cancellToken)
-        .catchError((onError) {
-      return Response(
-          requestOptions: RequestOptions(
-            path: url,
-          ),
-          statusCode: 401);
-    }).timeout(Constants.serverTimeout);
-  }
-
-  /// panch request method
-  Future<Response<dynamic>> _patchRequest(
-      {required String url,
-      dynamic body,
-      Map<String, String>? headers,
-      CancelToken? cancellToken}) async {
-    return dio
-        .patch(url,
-            data: body,
-            options: _makeOptions(headers: headers),
-            cancelToken: cancellToken)
-        .catchError((onError) {
-      return Response(
-          requestOptions: RequestOptions(
-            path: url,
-          ),
-          statusCode: 401);
-    }).timeout(Constants.serverTimeout);
-  }
-
-  /// delete request method
-  Future<Response> _deleteRequest(
-      {required String url,
-      Map<String, String>? headers,
-      CancelToken? cancellToken}) async {
-    return dio
-        .delete(
-      url,
-      cancelToken: cancellToken,
-      options: _makeOptions(headers: headers),
-    )
-        .catchError((dynamic onError) {
-      if (CancelToken.isCancel(onError)) {
-        debugPrint(onError);
-      }
-      return Response(
-          requestOptions: RequestOptions(
-            path: url,
-          ),
-          statusCode: 401);
-    }).timeout(Constants.serverTimeout);
-  }
-
-  @visibleForTesting
-  String makeAlerts({Response? response}) {
-    final ManageStatusCode manageSC = ManageStatusCode();
-    final HttpStatusCodeModel error =
-        manageSC.findError(sCode: response!.statusCode ?? 500);
-    final alertText =
-        'error ${error.statusCode} : ${error.description}\n${response.data}';
-    debugPrint('Response_Error =>  $alertText');
-    return alertText;
+  @override
+  Future<Response<dynamic>> delete(String url,
+      {Map<String, dynamic>? headers}) {
+    return dio.delete(url, options: Options(headers: headers));
   }
 }
 
-Options _makeOptions({Map<String, String>? headers}) {
-  return Options(
-      receiveDataWhenStatusError: true,
-      receiveTimeout: Constants.serverTimeout,
-      sendTimeout: Constants.serverTimeout,
-      validateStatus: (status) => true,
-      headers: headers);
+// Error Handling Class
+class ErrorManager implements IErrorManager {
+  @override
+  void handleError(Response response) {
+    final int statusCode = response.statusCode ?? 500;
+    debugPrint('Error: $statusCode, Response: ${response.data}');
+    // Handle the error based on status code
+  }
+}
+
+// RestApi Class (following SOLID principles)
+class RestApi {
+  final NetworkChecker networkChecker;
+
+  RestApi({
+    required this.networkChecker,
+  });
+
+  Future<DataState<Response>> request(String url,
+      {required RequestType requestType,
+      Map<String, dynamic>? body,
+      Map<String, dynamic>? headers,
+      Map<String, dynamic>? queryParameters}) async {
+    final DioHttpClient dioHttpClient = DioHttpClient();
+    final ErrorManager errorManager = ErrorManager();
+    final bool isConnected = await networkChecker.checkConnection();
+
+    if (!isConnected) {
+      return const DataFailed('No internet connection');
+    }
+
+    /// added [http] to url
+    url = TextTools.makestandardUrl(url);
+
+    try {
+      Response response;
+      switch (requestType) {
+        case RequestType.getRequest:
+          response = await dioHttpClient.get(url,
+              headers: headers, queryParameters: queryParameters);
+          break;
+        case RequestType.postRequest:
+          response =
+              await dioHttpClient.post(url, body: body, headers: headers);
+          break;
+        case RequestType.putRequest:
+          response = await dioHttpClient.put(url, body: body, headers: headers);
+          break;
+        case RequestType.patchRequest:
+          response =
+              await dioHttpClient.patch(url, body: body, headers: headers);
+          break;
+        case RequestType.deleteRequest:
+          response = await dioHttpClient.delete(url, headers: headers);
+          break;
+        default:
+          throw UnimplementedError('Request type not implemented');
+      }
+
+      if (response.statusCode != 200) {
+        errorManager.handleError(response);
+      }
+
+      return DataSuccess(response);
+    } on TimeoutException {
+      return const DataFailed('Request timed out');
+    } catch (e) {
+      return DataFailed('Error occurred: $e');
+    }
+  }
 }
 
 enum RequestType {
   getRequest,
   postRequest,
-  fileRequest,
   putRequest,
   patchRequest,
-  deleteRequest
+  deleteRequest,
 }
