@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:requester/core/widgets/custom_tabbar_view.dart';
 import 'package:requester/core/widgets/tabbar_outline_Indicator.dart';
+import 'package:requester/features/feature_requester/presentation/widgets/fragments/auth_fragments/aws_auth_fragment.dart';
+import 'package:requester/features/feature_requester/presentation/widgets/fragments/auth_fragments/basic_auth_fragment.dart';
+import 'package:requester/features/feature_requester/presentation/widgets/fragments/auth_fragments/bearer_auth_fragment.dart';
+import 'package:requester/features/feature_requester/presentation/widgets/fragments/auth_fragments/jwt_auth_fragment.dart';
+import 'package:requester/features/feature_requester/presentation/widgets/fragments/auth_fragments/oauth1_auth_fragment.dart';
 
 class AuthFragment extends StatelessWidget {
   const AuthFragment({super.key});
@@ -40,12 +45,12 @@ class AuthFragment extends StatelessWidget {
                 mini: true,
               ),
               CostumeTabBarView(
-                title: 'OAuth 2',
+                title: 'OAuth 1',
                 fontSize: 12,
                 mini: true,
               ),
               CostumeTabBarView(
-                title: 'NTLM',
+                title: 'JWT',
                 fontSize: 12,
                 mini: true,
               ),
@@ -59,11 +64,11 @@ class AuthFragment extends StatelessWidget {
           Expanded(
             child: TabBarView(
               children: [
-                Icon(Icons.abc_sharp),
-                Icon(Icons.abc_sharp),
-                Icon(Icons.abc_sharp),
-                Icon(Icons.abc_sharp),
-                Icon(Icons.abc_sharp),
+                BasicAuthFragment(),
+                BearerAuthFragment(),
+                OAuth1AuthFragment(),
+                JWTAuthFragment(),
+                AWSAuthFragment(),
               ],
             ),
           ),
